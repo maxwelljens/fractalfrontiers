@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dv13kat571ua4"]
+
+[ext_resource type="Texture2D" uid="uid://dw5vs82i0fi1g" path="res://icon.svg" id="1_nrs4c"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mkb0g"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="Ship" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_nrs4c")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_mkb0g")
