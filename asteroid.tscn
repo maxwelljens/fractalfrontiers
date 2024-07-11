@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bap2gxbilpq0k"]
+
+[ext_resource type="Script" path="res://asteroid.gd" id="1_2yc4t"]
+[ext_resource type="Texture2D" uid="uid://dw5vs82i0fi1g" path="res://icon.svg" id="1_i4bmd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xau5b"]
+
+[node name="Asteroid" type="Area2D"]
+script = ExtResource("1_2yc4t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.56, 1.6)
+shape = SubResource("RectangleShape2D_xau5b")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_i4bmd")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -42.0
+offset_right = 20.0
+offset_bottom = -19.0
+text = "100"
