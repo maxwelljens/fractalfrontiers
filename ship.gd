@@ -4,6 +4,14 @@ const TOP_SPEED = 500
 const SPEED_MULTIPLIER = 10
 const DRAG = 5
 
+@export var camera: Camera2D
+
+func _ready():
+  if not is_multiplayer_authority():
+    return
+  ## This scope determines that we actually own the ship.
+  camera.make_current()
+
 func _physics_process(delta):
   if is_multiplayer_authority():
     if Input.is_action_pressed("forward"):

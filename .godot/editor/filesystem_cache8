@@ -1,0 +1,15 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1720704667
+icon.svg::CompressedTexture2D::8766656920253565202::1720704603::1720704668::1::::<><>::
+multitest.gd::GDScript::-1::1720704603::0::1::::<>Node2D<>::
+MultiTest.gd::GDScript::-1::1720704603::0::1::::<>Node2D<>::
+multi_test.tscn::PackedScene::5788328831560970348::1720704603::0::1::::<><>::res://multitest.gd<>uid://dv13kat571ua4::::res://ship.tscn
+ship.gd::GDScript::-1::1720704603::0::1::::<>CharacterBody2D<>::
+ship.tscn::PackedScene::8688619553578201789::1720704603::0::1::::<><>::res://ship.gd<>uid://bx5goom5xrqd5::::res://art/spaceship.png
+::res://addons/::1720704603
+::res://addons/godot-vim/::1720704603
+godot-vim.gd::GDScript::-1::1720704603::0::1::::<>EditorPlugin<>::
+icon.svg::CompressedTexture2D::2602568095840445347::1720704603::1720704668::1::::<><>::
+plugin.cfg::TextFile::-1::1720704603::0::1::::<><>::
+::res://art/::1720704603
+spaceship.png::CompressedTexture2D::4063085478319946748::1720704603::1720704668::1::::<><>::

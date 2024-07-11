@@ -14,8 +14,9 @@ properties/2/path = NodePath("Camera2D:position")
 properties/2/spawn = true
 properties/2/replication_mode = 1
 
-[node name="Ship" type="CharacterBody2D"]
+[node name="Ship" type="CharacterBody2D" node_paths=PackedStringArray("camera")]
 script = ExtResource("1_36kp7")
+camera = NodePath("Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
