@@ -1,12 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://bap2gxbilpq0k"]
+[gd_scene load_steps=5 format=3 uid="uid://bap2gxbilpq0k"]
 
 [ext_resource type="Script" path="res://asteroid.gd" id="1_2yc4t"]
 [ext_resource type="Texture2D" uid="uid://dw5vs82i0fi1g" path="res://icon.svg" id="1_i4bmd"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_i33a4"]
+properties/0/path = NodePath("Label:text")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xau5b"]
 
 [node name="Asteroid" type="Area2D"]
 script = ExtResource("1_2yc4t")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_i33a4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(1.56, 1.6)
