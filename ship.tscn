@@ -1,16 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://dv13kat571ua4"]
+[gd_scene load_steps=4 format=3 uid="uid://dv13kat571ua4"]
 
-[ext_resource type="Texture2D" uid="uid://dw5vs82i0fi1g" path="res://icon.svg" id="1_nrs4c"]
+[ext_resource type="Script" path="res://ship.gd" id="1_36kp7"]
+[ext_resource type="Texture2D" uid="uid://bx5goom5xrqd5" path="res://art/spaceship.png" id="2_hls0o"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mkb0g"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("Camera2D:position")
+properties/2/spawn = true
+properties/2/replication_mode = 1
 
 [node name="Ship" type="CharacterBody2D"]
+script = ExtResource("1_36kp7")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_nrs4c")
+rotation = 1.5708
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_hls0o")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_mkb0g")
