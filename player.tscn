@@ -34,7 +34,7 @@ texture = SubResource("AtlasTexture_4ay1r")
 script = ExtResource("3_4bv3y")
 mass = 105300000
 inertia_mod = 0.13
-max_speed = 1
+max_speed = 145
 
 [node name="Control" type="Node" parent="."]
 script = ExtResource("3_yyr7e")
