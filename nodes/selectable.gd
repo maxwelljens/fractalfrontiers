@@ -3,7 +3,6 @@ extends Node
 
 var parent_node: Node
 
-
 func _ready():
   parent_node = get_parent()
   parent_node.input_event.connect(_on_parent_input_event)

@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://mfqv438mljqk"]
+[gd_scene load_steps=7 format=3 uid="uid://mfqv438mljqk"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_36kp7"]
 [ext_resource type="Texture2D" uid="uid://s4to67ffk84f" path="res://art/ships.png" id="2_xem4q"]
+[ext_resource type="Script" path="res://nodes/rig.gd" id="3_4bv3y"]
 [ext_resource type="Script" path="res://nodes/player/control_input.gd" id="3_yyr7e"]
-[ext_resource type="Script" path="res://nodes/player/velocity.gd" id="4_emnqk"]
-[ext_resource type="Script" path="res://nodes/player/drag.gd" id="4_fucc0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ay1r"]
 atlas = ExtResource("2_xem4q")
@@ -21,16 +20,10 @@ properties/2/path = NodePath("MiningLaser/TextureRect:visible")
 properties/2/spawn = true
 properties/2/replication_mode = 1
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("camera", "input_control", "velocity_component")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("camera", "input_control")]
 script = ExtResource("1_36kp7")
 camera = NodePath("Camera2D")
 input_control = NodePath("Control")
-velocity_component = NodePath("Velocity")
-
-[node name="Control" type="Node" parent="." node_paths=PackedStringArray("velocity_component")]
-script = ExtResource("3_yyr7e")
-speed = 500.0
-velocity_component = NodePath("../Velocity")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 3
@@ -38,6 +31,13 @@ rotation = 1.5708
 texture = SubResource("AtlasTexture_4ay1r")
 
 [node name="Rig" type="Node" parent="."]
+script = ExtResource("3_4bv3y")
+mass = 105300000
+inertia_mod = 0.13
+max_speed = 1
+
+[node name="Control" type="Node" parent="."]
+script = ExtResource("3_yyr7e")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_mkb0g")
@@ -60,11 +60,3 @@ horizontal_alignment = 1
 process_callback = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
-
-[node name="Drag" type="Node" parent="." node_paths=PackedStringArray("velocity")]
-script = ExtResource("4_fucc0")
-drag_scale = 500.0
-velocity = NodePath("../Velocity")
-
-[node name="Velocity" type="Node" parent="."]
-script = ExtResource("4_emnqk")
