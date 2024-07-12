@@ -1,32 +1,32 @@
-[gd_scene load_steps=5 format=3 uid="uid://bap2gxbilpq0k"]
+[gd_scene load_steps=6 format=3 uid="uid://bap2gxbilpq0k"]
 
-[ext_resource type="Script" path="res://asteroid.gd" id="1_2yc4t"]
-[ext_resource type="Texture2D" uid="uid://dw5vs82i0fi1g" path="res://icon.svg" id="1_i4bmd"]
+[ext_resource type="Texture2D" uid="uid://b4u5riw8kcnyr" path="res://art/asteroid/asteroid1.png" id="1_rjulx"]
+[ext_resource type="Script" path="res://nodes/mineable.gd" id="2_n5307"]
+[ext_resource type="Script" path="res://nodes/selectable.gd" id="3_rqhsg"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_i33a4"]
 properties/0/path = NodePath("Label:text")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xau5b"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rel2q"]
+size = Vector2(60.8974, 60.625)
 
 [node name="Asteroid" type="Area2D"]
-script = ExtResource("1_2yc4t")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_i33a4")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(1.56, 1.6)
-shape = SubResource("RectangleShape2D_xau5b")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("1_i4bmd")
+texture = ExtResource("1_rjulx")
 
-[node name="Label" type="Label" parent="."]
-offset_left = -20.0
-offset_top = -42.0
-offset_right = 20.0
-offset_bottom = -19.0
-text = "100"
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, -0.5)
+scale = Vector2(1.56, 1.6)
+shape = SubResource("RectangleShape2D_rel2q")
+
+[node name="Mineable" type="Node" parent="."]
+script = ExtResource("2_n5307")
+
+[node name="Selectable" type="Node" parent="."]
+script = ExtResource("3_rqhsg")
