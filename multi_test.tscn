@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cop56vjof0q5y"]
 
 [ext_resource type="Script" path="res://multitest.gd" id="1_gwi5h"]
-[ext_resource type="PackedScene" uid="uid://dv13kat571ua4" path="res://ship.tscn" id="2_fhm7r"]
+[ext_resource type="PackedScene" uid="uid://dv13kat571ua4" path="res://player.tscn" id="2_fhm7r"]
 [ext_resource type="PackedScene" uid="uid://bap2gxbilpq0k" path="res://asteroid.tscn" id="3_jd480"]
 
 [node name="MultiTest" type="Node2D"]
@@ -23,7 +23,6 @@ offset_bottom = 355.0
 text = "Join"
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://ship.tscn")
 spawn_path = NodePath("..")
 
 [node name="Asteroid" parent="." instance=ExtResource("3_jd480")]

@@ -2,15 +2,15 @@
 
 [ext_resource type="Texture2D" uid="uid://b4u5riw8kcnyr" path="res://art/asteroid/asteroid1.png" id="1_rjulx"]
 [ext_resource type="Script" path="res://nodes/mineable.gd" id="2_n5307"]
-[ext_resource type="Script" path="res://nodes/selectable.gd" id="3_rqhsg"]
+[ext_resource type="PackedScene" uid="uid://bctss60aqaqd2" path="res://nodes/selectable.tscn" id="3_41l7m"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_i33a4"]
 properties/0/path = NodePath("Label:text")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rel2q"]
-size = Vector2(60.8974, 60.625)
+[sub_resource type="CircleShape2D" id="CircleShape2D_a0ujn"]
+radius = 33.1913
 
 [node name="Asteroid" type="Area2D"]
 
@@ -23,10 +23,9 @@ texture = ExtResource("1_rjulx")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1.5, -0.5)
 scale = Vector2(1.56, 1.6)
-shape = SubResource("RectangleShape2D_rel2q")
+shape = SubResource("CircleShape2D_a0ujn")
 
 [node name="Mineable" type="Node" parent="."]
 script = ExtResource("2_n5307")
 
-[node name="Selectable" type="Node" parent="."]
-script = ExtResource("3_rqhsg")
+[node name="Selectable" parent="." instance=ExtResource("3_41l7m")]

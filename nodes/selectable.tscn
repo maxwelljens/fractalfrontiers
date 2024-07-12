@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bctss60aqaqd2"]
+
+[ext_resource type="Script" path="res://nodes/selectable.gd" id="1_0u5oq"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_fptuy"]
+
+[node name="Selectable" type="Node"]
+script = ExtResource("1_0u5oq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(38, 38)
+texture = SubResource("PlaceholderTexture2D_fptuy")
