@@ -32,9 +32,9 @@ texture = SubResource("AtlasTexture_4ay1r")
 
 [node name="Rig" type="Node" parent="."]
 script = ExtResource("3_4bv3y")
-mass = 105300000
-inertia_mod = 0.13
-max_speed = 145
+mass = 11250000
+inertia_mod = 0.78
+max_speed = 130
 
 [node name="Control" type="Node" parent="."]
 script = ExtResource("3_yyr7e")
@@ -51,10 +51,18 @@ anchor_bottom = 1.0
 offset_bottom = -1.0
 alignment = 2
 
-[node name="Cargo" type="Label" parent="UI/Bottom"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Bottom"]
 layout_mode = 2
-text = "NOTHING"
-horizontal_alignment = 1
+alignment = 1
+
+[node name="Speed" type="Label" parent="UI/Bottom/HBoxContainer"]
+custom_minimum_size = Vector2(132, 0)
+layout_mode = 2
+text = "SPEED"
+
+[node name="Cargo" type="Label" parent="UI/Bottom/HBoxContainer"]
+layout_mode = 2
+text = "0/2700 m3"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 process_callback = 0

@@ -29,11 +29,3 @@ shape = SubResource("CircleShape2D_a0ujn")
 script = ExtResource("2_n5307")
 
 [node name="Selectable" parent="." instance=ExtResource("3_41l7m")]
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-visible = false
-position = Vector2(-1.5, -0.5)
-scale = Vector2(1.56, 1.6)
-shape = SubResource("CircleShape2D_a0ujn")

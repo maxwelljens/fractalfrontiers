@@ -1,7 +1,5 @@
 extends CharacterBody2D
 
-const TOP_SPEED = 100
-
 @export var camera: Camera2D
 @export var input_control: InputControl
 
@@ -13,10 +11,6 @@ func _ready():
   camera.make_current()
 
 func _physics_process(_delta):
-  if is_multiplayer_authority():
-    if Input.is_action_just_released("ui_accept"):
-      $MiningLaser/TextureRect.visible = false
-  velocity = velocity.clamp(Vector2(-TOP_SPEED, -TOP_SPEED), Vector2(TOP_SPEED, TOP_SPEED))
   move_and_slide()
 
 func _enter_tree():
