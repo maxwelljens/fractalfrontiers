@@ -1,7 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://dv13kat571ua4"]
+[gd_scene load_steps=8 format=3 uid="uid://mfqv438mljqk"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_36kp7"]
 [ext_resource type="Texture2D" uid="uid://s4to67ffk84f" path="res://art/ships.png" id="2_xem4q"]
+[ext_resource type="Script" path="res://nodes/player/control_input.gd" id="3_yyr7e"]
+[ext_resource type="Script" path="res://nodes/player/velocity.gd" id="4_emnqk"]
+[ext_resource type="Script" path="res://nodes/player/drag.gd" id="4_fucc0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ay1r"]
 atlas = ExtResource("2_xem4q")
@@ -18,81 +21,18 @@ properties/2/path = NodePath("MiningLaser/TextureRect:visible")
 properties/2/spawn = true
 properties/2/replication_mode = 1
 
-[sub_resource type="Gradient" id="Gradient_g225v"]
-colors = PackedColorArray(0.0142752, 0.0142752, 0.0142752, 1, 0, 0, 0, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_66byd"]
-fractal_type = 2
-fractal_octaves = 10
-fractal_lacunarity = 1.355
-fractal_gain = 1.53
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_oivuu"]
-resource_local_to_scene = true
-width = 256
-height = 256
-generate_mipmaps = false
-seamless = true
-color_ramp = SubResource("Gradient_g225v")
-noise = SubResource("FastNoiseLite_66byd")
-
-[sub_resource type="Gradient" id="Gradient_0kux8"]
-offsets = PackedFloat32Array(0, 0.318182)
-colors = PackedColorArray(0.259294, 0.259294, 0.259294, 1, 0, 0, 0, 0)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_w7600"]
-noise_type = 0
-frequency = 0.0019
-fractal_octaves = 10
-fractal_gain = 1.5
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qcshy"]
-width = 1024
-height = 1024
-generate_mipmaps = false
-color_ramp = SubResource("Gradient_0kux8")
-noise = SubResource("FastNoiseLite_w7600")
-
-[sub_resource type="Gradient" id="Gradient_yawug"]
-offsets = PackedFloat32Array(0, 0.318182)
-colors = PackedColorArray(0.443497, 0.00153075, 0.212398, 1, 0, 0, 0, 0)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_l0cjv"]
-noise_type = 4
-fractal_octaves = 10
-fractal_lacunarity = 2.22
-fractal_gain = 0.825
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w0ehs"]
-width = 1024
-height = 1024
-generate_mipmaps = false
-seamless = true
-color_ramp = SubResource("Gradient_yawug")
-noise = SubResource("FastNoiseLite_l0cjv")
-
-[sub_resource type="Gradient" id="Gradient_rwq3g"]
-offsets = PackedFloat32Array(0, 0.0974026)
-colors = PackedColorArray(1, 1, 1, 0.0980392, 0, 0, 0, 0)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_sghe1"]
-noise_type = 2
-frequency = 0.0057
-fractal_lacunarity = 2.765
-fractal_gain = 1.08
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1yotw"]
-generate_mipmaps = false
-color_ramp = SubResource("Gradient_rwq3g")
-noise = SubResource("FastNoiseLite_sghe1")
-
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("camera")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("camera", "input_control", "velocity_component")]
 script = ExtResource("1_36kp7")
 camera = NodePath("Camera2D")
+input_control = NodePath("Control")
+velocity_component = NodePath("Velocity")
 
-[node name="Ship" type="Node" parent="."]
+[node name="Control" type="Node" parent="." node_paths=PackedStringArray("velocity_component")]
+script = ExtResource("3_yyr7e")
+speed = 500.0
+velocity_component = NodePath("../Velocity")
 
-[node name="Sprite2D" type="Sprite2D" parent="Ship"]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 3
 rotation = 1.5708
 texture = SubResource("AtlasTexture_4ay1r")
@@ -121,43 +61,10 @@ process_callback = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 
-[node name="BG" type="CanvasLayer" parent="Camera2D"]
-layer = -100
+[node name="Drag" type="Node" parent="." node_paths=PackedStringArray("velocity")]
+script = ExtResource("4_fucc0")
+drag_scale = 500.0
+velocity = NodePath("../Velocity")
 
-[node name="GalaxyBackground" type="TextureRect" parent="Camera2D/BG"]
-offset_left = -3207.0
-offset_top = -1169.0
-offset_right = 3290.0
-offset_bottom = 1208.0
-texture = SubResource("NoiseTexture2D_oivuu")
-stretch_mode = 1
-
-[node name="Stars" type="TextureRect" parent="Camera2D/BG"]
-offset_left = -3207.0
-offset_top = -1169.0
-offset_right = 3297.0
-offset_bottom = 1175.0
-texture = SubResource("NoiseTexture2D_qcshy")
-stretch_mode = 1
-
-[node name="Nebulae" type="TextureRect" parent="Camera2D/BG"]
-offset_left = -3207.0
-offset_top = -1169.0
-offset_right = 3297.0
-offset_bottom = 1175.0
-texture = SubResource("NoiseTexture2D_w0ehs")
-stretch_mode = 1
-
-[node name="ParallaxBackground" type="ParallaxBackground" parent="Camera2D"]
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="Camera2D/ParallaxBackground"]
-motion_scale = Vector2(0.2, 0.2)
-motion_mirroring = Vector2(512, 512)
-
-[node name="Dust" type="TextureRect" parent="Camera2D/ParallaxBackground/ParallaxLayer"]
-offset_left = -3247.0
-offset_top = -1162.0
-offset_right = 3257.0
-offset_bottom = 1182.0
-texture = SubResource("NoiseTexture2D_1yotw")
-stretch_mode = 1
+[node name="Velocity" type="Node" parent="."]
+script = ExtResource("4_emnqk")

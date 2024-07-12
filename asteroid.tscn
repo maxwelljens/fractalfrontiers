@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b4u5riw8kcnyr" path="res://art/asteroid/asteroid1.png" id="1_rjulx"]
 [ext_resource type="Script" path="res://nodes/mineable.gd" id="2_n5307"]
-[ext_resource type="PackedScene" uid="uid://bctss60aqaqd2" path="res://nodes/selectable.tscn" id="3_41l7m"]
+[ext_resource type="PackedScene" uid="uid://cy1vevbr2wdfw" path="res://nodes/selectable.tscn" id="3_41l7m"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_i33a4"]
 properties/0/path = NodePath("Label:text")
@@ -29,3 +29,11 @@ shape = SubResource("CircleShape2D_a0ujn")
 script = ExtResource("2_n5307")
 
 [node name="Selectable" parent="." instance=ExtResource("3_41l7m")]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+visible = false
+position = Vector2(-1.5, -0.5)
+scale = Vector2(1.56, 1.6)
+shape = SubResource("CircleShape2D_a0ujn")
