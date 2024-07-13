@@ -8,6 +8,10 @@ class_name Mineable extends Node
 func excavate(amount: int) -> int:
   quantity -= amount
   if quantity <= 0:
-    parent_node.queue_free()
+    _destroy.rpc()
     return quantity + amount
   return amount
+
+@rpc("call_local")
+func _destroy():
+  parent_node.queue_free()

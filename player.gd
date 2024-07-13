@@ -19,6 +19,7 @@ func _ready():
   camera.make_current()
 
 func _physics_process(_delta):
+  if not is_multiplayer_authority(): return
   if Input.is_action_pressed("ui_accept") and selection:
     _draw_line()
   if Input.is_action_just_released("ui_accept") and selection:
