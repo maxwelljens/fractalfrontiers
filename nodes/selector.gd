@@ -1,14 +1,16 @@
-class_name TargetHolder extends Node2D
+class_name Selector extends Node2D
 
-var targets: Array[Node2D]
-static var instance: TargetHolder
+var selection: Node2D
+static var instance: Selector 
 
 func _ready() -> void:
   if is_multiplayer_authority():
     instance = self
 
-func append_target(target: Node2D) -> void:
-  targets.append(target)
+func select(target: Node2D) -> void:
+  selection = target
+  print("Selected: %s" % selection)
 
-func remove_target(target: Node2D) -> void:
-  targets.erase(target)
+func deselect() -> void:
+  print("Deselected")
+  selection = null
