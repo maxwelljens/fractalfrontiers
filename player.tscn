@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://s4to67ffk84f" path="res://art/ships.png" id="2_xem4q"]
 [ext_resource type="Script" path="res://nodes/rig.gd" id="3_4bv3y"]
 [ext_resource type="Script" path="res://nodes/player/control_input.gd" id="3_yyr7e"]
-[ext_resource type="Script" path="res://nodes/global/targets.gd" id="5_d777h"]
+[ext_resource type="Script" path="res://nodes/selector.gd" id="5_2irkj"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mkb0g"]
 properties/0/path = NodePath(".:position")
@@ -40,6 +40,12 @@ max_speed = 130
 [node name="Control" type="Node" parent="."]
 script = ExtResource("3_yyr7e")
 
+[node name="Selector" type="Node2D" parent="."]
+script = ExtResource("5_2irkj")
+
+[node name="Line2D" type="Line2D" parent="."]
+default_color = Color(0.926083, 0, 0.19246, 1)
+
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Bottom" type="VBoxContainer" parent="UI"]
@@ -72,6 +78,3 @@ text = "0/2700 m3"
 process_callback = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
-
-[node name="Selector" type="Node2D" parent="."]
-script = ExtResource("5_d777h")

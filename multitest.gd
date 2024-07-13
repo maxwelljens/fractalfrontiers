@@ -24,6 +24,5 @@ func _remove_buttons():
   $Host.visible = false
   $Join.visible = false
 
-
 func _on_multiplayer_spawner_spawned(node):
     print(node) 
