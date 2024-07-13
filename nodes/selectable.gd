@@ -1,6 +1,6 @@
 extends Node
 
-var parent_node: Node
+var parent_node: Node2D
 
 func _ready():
   parent_node = get_parent()
@@ -9,10 +9,11 @@ func _ready():
   parent_node.mouse_exited.connect(_on_parent_mouse_exited)
 
 func _on_parent_input_event(_viewport, _event, _shape_idx):
-  if Input.is_action_just_pressed("left_click") and parent_node not in Targets.targets:
-    Targets.targets.append(parent_node)
-  elif Input.is_action_just_pressed("left_click") and parent_node in Targets.targets:
-    Targets.targets.erase(parent_node)
+  var targets: TargetHolder = TargetHolder.instance
+  if Input.is_action_just_pressed("left_click") and parent_node not in targets.targets:
+    targets.append_target(parent_node)
+  elif Input.is_action_just_pressed("left_click") and parent_node in targets.targets:
+    targets.remove_target(parent_node)
 
 func _on_parent_mouse_entered():
   $Sprite2D.visible = true

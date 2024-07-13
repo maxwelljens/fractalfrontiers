@@ -1,6 +1,6 @@
-extends Node2D
+class_name NetworkManager extends Node2D
 
-var peer = ENetMultiplayerPeer.new()
+static var peer = ENetMultiplayerPeer.new()
 @export var player_scene: PackedScene
 
 func _on_host_pressed():
@@ -12,8 +12,8 @@ func _on_host_pressed():
   
 func _add_player(id = 1):
   var player = player_scene.instantiate()
-  player.name = str(id)
-  add_child.call_deferred(player)
+  player.name = str(id) 
+  $MultiplayerSpawner/Networked.add_child(player, true)
 
 func _on_join_pressed():
   peer.create_client("localhost", 2010)
@@ -23,3 +23,7 @@ func _on_join_pressed():
 func _remove_buttons():
   $Host.visible = false
   $Join.visible = false
+
+
+func _on_multiplayer_spawner_spawned(node):
+    print(node) 

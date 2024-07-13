@@ -76,6 +76,12 @@ noise = SubResource("FastNoiseLite_sghe1")
 script = ExtResource("1_gwi5h")
 player_scene = ExtResource("2_fhm7r")
 
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://player.tscn")
+spawn_path = NodePath("Networked")
+
+[node name="Networked" type="Node2D" parent="MultiplayerSpawner"]
+
 [node name="Host" type="Button" parent="."]
 offset_left = 99.0
 offset_top = 286.0
@@ -89,9 +95,6 @@ offset_top = 324.0
 offset_right = 137.0
 offset_bottom = 355.0
 text = "Join"
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-spawn_path = NodePath("..")
 
 [node name="Asteroid" parent="." instance=ExtResource("3_jd480")]
 position = Vector2(162, 2)
@@ -137,5 +140,6 @@ offset_bottom = 1182.0
 texture = SubResource("NoiseTexture2D_rlbu5")
 stretch_mode = 1
 
+[connection signal="spawned" from="MultiplayerSpawner" to="." method="_on_multiplayer_spawner_spawned"]
 [connection signal="pressed" from="Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="Join" to="." method="_on_join_pressed"]
