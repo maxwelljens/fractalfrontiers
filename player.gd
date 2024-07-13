@@ -11,6 +11,7 @@ func _ready():
   camera.make_current()
 
 func _physics_process(_delta):
+  $UI/Bottom/HBoxContainer/Targets.text = "TARGETS: %s" % Targets.targets
   move_and_slide()
 
 func _enter_tree():

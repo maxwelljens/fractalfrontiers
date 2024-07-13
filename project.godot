@@ -15,6 +15,10 @@ run/main_scene="res://multi_test.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Targets="*res://nodes/global/targets.gd"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/godot-vim/plugin.cfg")

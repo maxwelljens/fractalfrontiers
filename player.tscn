@@ -60,6 +60,11 @@ custom_minimum_size = Vector2(132, 0)
 layout_mode = 2
 text = "SPEED"
 
+[node name="Targets" type="Label" parent="UI/Bottom/HBoxContainer"]
+custom_minimum_size = Vector2(132, 0)
+layout_mode = 2
+text = "TARGETS:"
+
 [node name="Cargo" type="Label" parent="UI/Bottom/HBoxContainer"]
 layout_mode = 2
 text = "0/2700 m3"
