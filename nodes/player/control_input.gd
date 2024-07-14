@@ -9,6 +9,7 @@ var acceleration_time := 0.0
 var speed := 0.0
 
 func _process(delta: float) -> void:
+  if not is_multiplayer_authority(): return
   if Input.is_action_pressed("forward"):
     acceleration_time += delta
   else:
@@ -19,7 +20,7 @@ func _process(delta: float) -> void:
     player.rotation += (ship.inertia_mod - speed / ship.max_speed) * delta
   if Input.is_action_pressed("left"):
     player.rotation += -(ship.inertia_mod - speed / ship.max_speed) * delta
-  $"../UI/Bottom/HBoxContainer/Speed".text = "SPEED: %d m/s" % speed
+  player.update_speed(speed)
   _move()
 
 func _move() -> void:

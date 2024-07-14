@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://cop56vjof0q5y"]
+[gd_scene load_steps=17 format=3 uid="uid://cop56vjof0q5y"]
 
 [ext_resource type="Script" path="res://multitest.gd" id="1_gwi5h"]
 [ext_resource type="PackedScene" uid="uid://mfqv438mljqk" path="res://player.tscn" id="2_fhm7r"]
 [ext_resource type="PackedScene" uid="uid://bap2gxbilpq0k" path="res://asteroid.tscn" id="3_jd480"]
+[ext_resource type="Script" path="res://ui.gd" id="4_xe4qk"]
 
 [sub_resource type="Gradient" id="Gradient_g225v"]
 colors = PackedColorArray(0.0142752, 0.0142752, 0.0142752, 1, 0, 0, 0, 1)
@@ -82,14 +83,46 @@ spawn_path = NodePath("Networked")
 
 [node name="Networked" type="Node2D" parent="MultiplayerSpawner"]
 
-[node name="Host" type="Button" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("4_xe4qk")
+
+[node name="Bottom" type="VBoxContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -1.0
+alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Bottom"]
+layout_mode = 2
+alignment = 1
+
+[node name="Speed" type="Label" parent="UI/Bottom/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(132, 0)
+layout_mode = 2
+text = "SPEED"
+
+[node name="Targets" type="Label" parent="UI/Bottom/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(132, 0)
+layout_mode = 2
+
+[node name="Cargo" type="Label" parent="UI/Bottom/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0/2700 m3"
+
+[node name="Host" type="Button" parent="UI"]
+unique_name_in_owner = true
 offset_left = 99.0
 offset_top = 286.0
 offset_right = 143.0
 offset_bottom = 317.0
 text = "Host"
 
-[node name="Join" type="Button" parent="."]
+[node name="Join" type="Button" parent="UI"]
+unique_name_in_owner = true
 offset_left = 99.0
 offset_top = 324.0
 offset_right = 137.0
@@ -141,5 +174,5 @@ texture = SubResource("NoiseTexture2D_rlbu5")
 stretch_mode = 1
 
 [connection signal="spawned" from="MultiplayerSpawner" to="." method="_on_multiplayer_spawner_spawned"]
-[connection signal="pressed" from="Host" to="." method="_on_host_pressed"]
-[connection signal="pressed" from="Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="UI/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="UI/Join" to="." method="_on_join_pressed"]

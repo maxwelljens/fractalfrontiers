@@ -1,5 +1,7 @@
 class_name NetworkManager extends Node2D
 
+@onready var host_button: Button = %Host
+@onready var join_button: Button = %Join
 static var peer = ENetMultiplayerPeer.new()
 @export var player_scene: PackedScene
 
@@ -21,8 +23,8 @@ func _on_join_pressed():
   _remove_buttons()
 
 func _remove_buttons():
-  $Host.visible = false
-  $Join.visible = false
+  host_button.visible = false
+  join_button.visible = false
 
 func _on_multiplayer_spawner_spawned(node):
     print(node) 

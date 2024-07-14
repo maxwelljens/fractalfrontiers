@@ -12,6 +12,6 @@ func excavate(amount: int) -> int:
     return quantity + amount
   return amount
 
-@rpc("call_local")
+@rpc("call_local", "any_peer")
 func _destroy():
   parent_node.queue_free()

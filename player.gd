@@ -2,13 +2,12 @@ extends CharacterBody2D
 
 @export var camera: Camera2D
 @export var input_control: InputControl
+var ore: int = 0
 
-@onready var targets = %Targets
-@onready var cargo = %Cargo
-@onready var ui = $UI
 var selection: Node2D:
   get: return Selector.instance.selection
-var ore: int = 0
+var ui: UI:
+  get: return UI.instance
 
 func _ready():
   if not is_multiplayer_authority():
@@ -25,12 +24,15 @@ func _physics_process(_delta):
   if Input.is_action_just_released("ui_accept") and selection:
     $Line2D.clear_points()
     ore += Selector.instance.selection.find_child("Mineable").excavate(200)
-    cargo.text = "%d/2700 m3" % ore
+    ui.ui_cargo.text = "%d/2700 m3" % ore
   if selection:
-    targets.text = "SELECTED: %s" % [selection]
+    ui.ui_targets.text = "SELECTED: %s" % selection
   else:
-    targets.text = "-***-"
+    ui.ui_targets.text = "-***-"
   move_and_slide()
+
+func update_speed(speed: float) -> void:
+  ui.ui_speed.text = "SPEED: %d m/s" % speed
 
 func _enter_tree():
   set_multiplayer_authority(name.to_int())
