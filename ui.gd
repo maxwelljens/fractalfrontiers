@@ -5,6 +5,15 @@ class_name UI extends CanvasLayer
 @onready var ui_cargo: Label = %Cargo
 static var instance: UI
 
+var selection: Selector:
+  get: return Selector.instance.selection
+var player: Player:
+  get: return Player.instance
+
 func _ready() -> void:
-  if is_multiplayer_authority(): 
-    instance = self
+  instance = self
+
+func _physics_process(_delta):
+  ui_cargo.text = "%d/2700 m3" % player.ore
+  if selection == null:
+    ui_targets.text = "-***-"

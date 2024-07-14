@@ -33,9 +33,13 @@ texture = SubResource("AtlasTexture_4ay1r")
 
 [node name="Rig" type="Node" parent="."]
 script = ExtResource("3_4bv3y")
-mass = 11250000
-inertia_mod = 0.78
 max_speed = 130
+inertia_mod = 0.78
+warp_speed = 4.5
+hitpoints = 2600
+mass = 11250000
+volume = 240000
+cargo_capacity = 2700
 
 [node name="Control" type="Node" parent="."]
 script = ExtResource("3_yyr7e")

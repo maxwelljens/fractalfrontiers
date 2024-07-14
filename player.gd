@@ -1,18 +1,21 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
 @export var camera: Camera2D
 @export var input_control: InputControl
-var ore: int = 0
+@onready var cargo_capacity: int = $Rig.cargo_capacity
+@onready var speed = $Control.speed
+static var instance: Player
+var ore: int
 
-var selection: Node2D:
+var selection: Selector:
   get: return Selector.instance.selection
 var ui: UI:
   get: return UI.instance
 
 func _ready():
   if not is_multiplayer_authority():
+    instance = self
     input_control.set_process(false)
-    ui.queue_free()
     return
   ## This scope determines that we actually own the ship.
   camera.make_current()
@@ -23,7 +26,7 @@ func _physics_process(_delta):
     _draw_line()
   if Input.is_action_just_released("ui_accept") and selection:
     $Line2D.clear_points()
-    ore += Selector.instance.selection.find_child("Mineable").excavate(200)
+    ore += selection.find_child("Mineable").excavate(200)
     ui.ui_cargo.text = "%d/2700 m3" % ore
   if selection:
     ui.ui_targets.text = "SELECTED: %s" % selection

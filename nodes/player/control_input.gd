@@ -1,6 +1,6 @@
 class_name InputControl extends Node
 
-@onready var player: CharacterBody2D = get_parent()
+@onready var player: Player = get_parent()
 @onready var ship: Rig = player.find_child("Rig")
 
 const EULER := 2.71828183
