@@ -9,7 +9,8 @@ func _ready() -> void:
   parent_node.mouse_exited.connect(_on_parent_mouse_exited)
 
 func _exit_tree() -> void:
-  Selector.instance.deselect()
+  if Selector.instance != null:
+    Selector.instance.deselect()
 
 func _on_parent_input_event(_viewport, _event, _shape_idx) -> void:
   var selector := Selector.instance

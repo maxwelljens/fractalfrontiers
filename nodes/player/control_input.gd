@@ -20,7 +20,7 @@ func _process(delta: float) -> void:
     player.rotation += (ship.inertia_mod - speed / ship.max_speed) * delta
   if Input.is_action_pressed("left"):
     player.rotation += -(ship.inertia_mod - speed / ship.max_speed) * delta
-  player.update_speed(speed)
+  player.speed = speed
   _move()
 
 func _move() -> void:

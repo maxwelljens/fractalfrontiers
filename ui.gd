@@ -14,6 +14,12 @@ func _ready() -> void:
   instance = self
 
 func _physics_process(_delta):
-  ui_cargo.text = "%d/2700 m3" % player.ore
+  if player == null: return
+  ui_cargo.text = "%s/2700 m3" % player.ore
   if selection == null:
     ui_targets.text = "-***-"
+  if selection:
+    ui_targets.text = "SELECTED: %s" % selection
+  else:
+    ui_targets.text = "-***-" 
+  ui_speed.text = "SPEED: %d m/s" % player.speed

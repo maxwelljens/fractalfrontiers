@@ -3,8 +3,8 @@ class_name Player extends CharacterBody2D
 @export var camera: Camera2D
 @export var input_control: InputControl
 @onready var cargo_capacity: int = $Rig.cargo_capacity
-@onready var speed = $Control.speed
 static var instance: Player
+var speed: float
 var ore: int
 
 var selection: Selector:
@@ -14,10 +14,10 @@ var ui: UI:
 
 func _ready():
   if not is_multiplayer_authority():
-    instance = self
     input_control.set_process(false)
     return
   ## This scope determines that we actually own the ship.
+  instance = self
   camera.make_current()
 
 func _physics_process(_delta):
@@ -27,15 +27,10 @@ func _physics_process(_delta):
   if Input.is_action_just_released("ui_accept") and selection:
     $Line2D.clear_points()
     ore += selection.find_child("Mineable").excavate(200)
-    ui.ui_cargo.text = "%d/2700 m3" % ore
-  if selection:
-    ui.ui_targets.text = "SELECTED: %s" % selection
-  else:
-    ui.ui_targets.text = "-***-"
   move_and_slide()
 
-func update_speed(speed: float) -> void:
-  ui.ui_speed.text = "SPEED: %d m/s" % speed
+func set_speed(x: float) -> void:
+  speed = x
 
 func _enter_tree():
   set_multiplayer_authority(name.to_int())
