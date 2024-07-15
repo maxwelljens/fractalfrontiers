@@ -9,6 +9,7 @@ func _ready() -> void:
   parent_node.mouse_exited.connect(_on_parent_mouse_exited)
 
 func _exit_tree() -> void:
+  # If the Selectable scene is freed then make sure to deselect it
   if Selector.instance != null:
     Selector.instance.deselect()
 

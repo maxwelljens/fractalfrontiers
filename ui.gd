@@ -15,11 +15,10 @@ func _ready() -> void:
 
 func _physics_process(_delta):
   if player == null: return
-  ui_cargo.text = "%s/2700 m3" % player.ore
-  if selection == null:
-    ui_targets.text = "-***-"
-  if selection:
+  var cargo_info: Dictionary = player.rig.get_cargo_volume()
+  ui_cargo.text = "%s/%s m3"  % [cargo_info["cargo_volume"], cargo_info["cargo_capacity"]]
+  if selection is Node:
     ui_targets.text = "SELECTED: %s" % selection
   else:
     ui_targets.text = "-***-" 
-  ui_speed.text = "SPEED: %d m/s" % player.speed
+  ui_speed.text = "SPEED: %d m/s" % player.control.speed

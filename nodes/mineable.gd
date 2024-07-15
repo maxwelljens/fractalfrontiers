@@ -10,12 +10,12 @@ class_name Mineable extends Node
 func _ready() -> void:
   print("Asteroid contains: %s" % items[type.to_lower()]["mineral"])
 
-func excavate(amount: int) -> int:
+func excavate(amount: int) -> Dictionary:
   quantity -= amount
   if quantity <= 0:
     _destroy.rpc()
-    return quantity + amount
-  return amount
+    return {type.to_lower(): quantity + amount}
+  return {type.to_lower(): amount}
 
 @rpc("call_local", "any_peer")
 func _destroy():
