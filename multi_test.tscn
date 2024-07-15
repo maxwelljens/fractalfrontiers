@@ -1,9 +1,27 @@
-[gd_scene load_steps=17 format=3 uid="uid://cop56vjof0q5y"]
+[gd_scene load_steps=22 format=3 uid="uid://cop56vjof0q5y"]
 
 [ext_resource type="Script" path="res://multitest.gd" id="1_gwi5h"]
 [ext_resource type="PackedScene" uid="uid://mfqv438mljqk" path="res://player.tscn" id="2_fhm7r"]
 [ext_resource type="PackedScene" uid="uid://bap2gxbilpq0k" path="res://asteroid.tscn" id="3_jd480"]
+[ext_resource type="FontFile" uid="uid://d4bjtil50nvm8" path="res://font/iosevka_ss15_semibold.ttf" id="4_bb16i"]
 [ext_resource type="Script" path="res://ui.gd" id="4_xe4qk"]
+[ext_resource type="Texture2D" uid="uid://fnxa5na6nnpr" path="res://art/icons.png" id="5_m8no2"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_8n6li"]
+color = Color(0.164751, 0.164751, 0.164751, 1)
+grow_begin = -4.0
+grow_end = -4.0
+vertical = true
+
+[sub_resource type="Theme" id="Theme_gevro"]
+Label/font_sizes/font_size = 12
+Label/fonts/font = ExtResource("4_bb16i")
+VSeparator/constants/separation = 0
+VSeparator/styles/separator = SubResource("StyleBoxLine_8n6li")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3shd1"]
+atlas = ExtResource("5_m8no2")
+region = Rect2(119, 125, 16, 16)
 
 [sub_resource type="Gradient" id="Gradient_g225v"]
 colors = PackedColorArray(0.0142752, 0.0142752, 0.0142752, 1, 0, 0, 0, 1)
@@ -90,7 +108,8 @@ script = ExtResource("4_xe4qk")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
 alignment = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/Bottom"]
@@ -108,10 +127,67 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(132, 0)
 layout_mode = 2
 
-[node name="Cargo" type="Label" parent="UI/Bottom/HBoxContainer"]
+[node name="Inventory" type="PanelContainer" parent="UI"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -265.0
+offset_top = -237.0
+offset_right = -17.0
+offset_bottom = -21.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = SubResource("Theme_gevro")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Inventory"]
+layout_mode = 2
+
+[node name="Cargo" type="Label" parent="UI/Inventory/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "0/2700 m3"
+
+[node name="List" type="ScrollContainer" parent="UI/Inventory/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Inventory/VBoxContainer/List"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Entry" type="PanelContainer" parent="UI/Inventory/VBoxContainer/List/VBoxContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="HBoxContainer" parent="UI/Inventory/VBoxContainer/List/VBoxContainer/Entry"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="UI/Inventory/VBoxContainer/List/VBoxContainer/Entry/GridContainer"]
+texture_filter = 5
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_3shd1")
+stretch_mode = 5
+
+[node name="Separator" type="VSeparator" parent="UI/Inventory/VBoxContainer/List/VBoxContainer/Entry/GridContainer"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="UI/Inventory/VBoxContainer/List/VBoxContainer/Entry/GridContainer"]
+layout_mode = 2
+text = "Ferroaster"
+
+[node name="Separator2" type="VSeparator" parent="UI/Inventory/VBoxContainer/List/VBoxContainer/Entry/GridContainer"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Amount" type="Label" parent="UI/Inventory/VBoxContainer/List/VBoxContainer/Entry/GridContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="Button" type="Button" parent="UI/Inventory/VBoxContainer/List/VBoxContainer/Entry"]
+layout_mode = 2
+flat = true
 
 [node name="Host" type="Button" parent="UI"]
 unique_name_in_owner = true

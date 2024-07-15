@@ -7,11 +7,9 @@ class_name Mineable extends Node
 @onready var parent_node: Node2D = get_parent()
 @onready var selectable_node: Selectable = parent_node.find_child("Selectable")
 
-func _ready() -> void:
-  print("Asteroid contains: %s" % items[type.to_lower()]["mineral"])
-
 func excavate(amount: int) -> Dictionary:
   quantity -= amount
+  print(quantity)
   if quantity <= 0:
     _destroy.rpc()
     return {type.to_lower(): quantity + amount}

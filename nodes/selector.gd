@@ -9,8 +9,6 @@ func _ready() -> void:
 
 func select(target: Node2D) -> void:
   selection = target
-  print("Selected: %s" % selection)
 
 func deselect() -> void:
-  print("Deselected")
   selection = null

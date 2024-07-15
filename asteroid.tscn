@@ -5,6 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://cy1vevbr2wdfw" path="res://nodes/selectable.tscn" id="3_41l7m"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_i33a4"]
+properties/0/path = NodePath("Mineable:quantity")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a0ujn"]
 radius = 33.1913

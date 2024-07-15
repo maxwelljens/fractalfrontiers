@@ -24,6 +24,13 @@ func add_items(to_add: Dictionary) -> void:
     else:
       cargo[key] = {"amount": to_add[key]}
 
+func get_cargo(metadata := false) -> Dictionary:
+  var cargo_get: Dictionary
+  if metadata: pass
+  for item in cargo:
+    cargo_get[item] = cargo[item]["amount"]
+  return cargo_get
+
 func get_cargo_volume() -> Dictionary:
   var cargo_volume: int
   for item in cargo:
