@@ -1,5 +1,7 @@
 class_name Rig extends Node
 
+const items: Dictionary = items_data.ITEMS
+
 @export_category("Fittings")
 @export var powergrid: float
 @export var processor: float
@@ -22,7 +24,8 @@ class_name Rig extends Node
 @export_category("Resources")
 @export var items_data: ItemsDB = preload("res://nodes/globals/items.tres")
 
-var items: Dictionary = items_data.ITEMS
+signal cargo_updated
+
 var cargo: Dictionary
 
 var ui: UI:
@@ -39,7 +42,7 @@ func add_items(to_add: Dictionary) -> void:
       # Make new entry
       cargo[key] = {"amount": to_add[key]}
       cargo[key]["volume"] = _calculate_volume(key, cargo[key]["amount"])
-  ui.ui_inventory.update_interface(cargo) 
+  cargo_updated.emit()
 
 func _calculate_volume(item_name: String, amount: int) -> int:
   # Calculate volume of item from ItemDB

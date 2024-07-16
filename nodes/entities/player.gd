@@ -3,8 +3,8 @@ class_name Player extends CharacterBody2D
 @export var camera: Camera2D
 @export var input_control: InputControl
 @onready var rig = $Rig
-@onready var control = $Control
 @onready var cargo_capacity: int = $Rig.cargo_capacity
+@onready var control = $Control
 static var instance: Player
 var speed: float
 var ore: int

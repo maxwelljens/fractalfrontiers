@@ -9,7 +9,11 @@ class_name Inventory extends PanelContainer
 var player_rig: Rig:
   get: return Player.instance.rig
 
-func update_interface(cargo: Dictionary) -> void:
+func _ready() -> void:
+  await get_tree().process_frame
+  player_rig.cargo_updated.connect(_update_interface)
+
+func _update_interface(cargo: Dictionary) -> void:
   # Refresh list
   for child in list.get_children():
     if child == entry: continue 
