@@ -1,10 +1,8 @@
 class_name InputControl extends Node
 
+const EULER := 2.71828183
 @onready var player: Player = get_parent()
 @onready var ship: Rig = player.find_child("Rig")
-
-const EULER := 2.71828183
-
 var acceleration_time := 0.0
 var speed := 0.0
 
@@ -17,9 +15,9 @@ func _process(delta: float) -> void:
   if Input.is_action_pressed("backward"):
     acceleration_time -= delta
   if Input.is_action_pressed("right"):
-    player.rotation += (ship.inertia_mod - speed / ship.max_speed) * delta
+    player.rotation += (ship.inertia_mod * 1.5 - speed / ship.max_speed) * delta
   if Input.is_action_pressed("left"):
-    player.rotation += -(ship.inertia_mod - speed / ship.max_speed) * delta
+    player.rotation += -(ship.inertia_mod * 1.5 - speed / ship.max_speed) * delta
   player.speed = speed
   _move()
 

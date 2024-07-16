@@ -12,9 +12,9 @@ class_name Rig extends Node
 @export var cargo_capacity: int
 
 @export_category("Resources")
-@export var items_data: ItemsDB = preload("res://nodes/items.tres")
+@export var items_data: ItemsDB = preload("res://nodes/globals/items.tres")
 
-var items: Dictionary = items_data.items
+var items: Dictionary = items_data.ITEMS
 var cargo: Dictionary
 
 func add_items(to_add: Dictionary) -> void:

@@ -1,27 +1,20 @@
 [gd_scene load_steps=22 format=3 uid="uid://cop56vjof0q5y"]
 
-[ext_resource type="Script" path="res://multitest.gd" id="1_gwi5h"]
-[ext_resource type="PackedScene" uid="uid://mfqv438mljqk" path="res://player.tscn" id="2_fhm7r"]
-[ext_resource type="PackedScene" uid="uid://bap2gxbilpq0k" path="res://asteroid.tscn" id="3_jd480"]
-[ext_resource type="FontFile" uid="uid://d4bjtil50nvm8" path="res://font/iosevka_ss15_semibold.ttf" id="4_bb16i"]
-[ext_resource type="Script" path="res://ui.gd" id="4_xe4qk"]
+[ext_resource type="Script" path="res://nodes/levels/multitest.gd" id="1_gwi5h"]
+[ext_resource type="PackedScene" uid="uid://mfqv438mljqk" path="res://nodes/entities/player.tscn" id="2_fhm7r"]
+[ext_resource type="PackedScene" uid="uid://bap2gxbilpq0k" path="res://nodes/entities/asteroid.tscn" id="3_jd480"]
+[ext_resource type="PackedScene" uid="uid://lvluk472l87y" path="res://nodes/ui/inventory.tscn" id="4_o5nmd"]
+[ext_resource type="Theme" uid="uid://cnudye4assl6f" path="res://nodes/ui/ui_theme.tres" id="4_te4fa"]
+[ext_resource type="Script" path="res://nodes/ui.gd" id="4_xe4qk"]
 [ext_resource type="Texture2D" uid="uid://fnxa5na6nnpr" path="res://art/icons.png" id="5_m8no2"]
 
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_8n6li"]
-color = Color(0.164751, 0.164751, 0.164751, 1)
-grow_begin = -4.0
-grow_end = -4.0
-vertical = true
-
-[sub_resource type="Theme" id="Theme_gevro"]
-Label/font_sizes/font_size = 12
-Label/fonts/font = ExtResource("4_bb16i")
-VSeparator/constants/separation = 0
-VSeparator/styles/separator = SubResource("StyleBoxLine_8n6li")
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3shd1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_3yoyp"]
 atlas = ExtResource("5_m8no2")
-region = Rect2(119, 125, 16, 16)
+region = Rect2(52, 167, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5pcmb"]
+atlas = ExtResource("5_m8no2")
+region = Rect2(34, 125, 16, 16)
 
 [sub_resource type="Gradient" id="Gradient_g225v"]
 colors = PackedColorArray(0.0142752, 0.0142752, 0.0142752, 1, 0, 0, 0, 1)
@@ -96,7 +89,7 @@ script = ExtResource("1_gwi5h")
 player_scene = ExtResource("2_fhm7r")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://player.tscn")
+_spawnable_scenes = PackedStringArray("res://nodes/entities/player.tscn")
 spawn_path = NodePath("Networked")
 
 [node name="Networked" type="Node2D" parent="MultiplayerSpawner"]
@@ -116,78 +109,80 @@ alignment = 2
 layout_mode = 2
 alignment = 1
 
-[node name="Speed" type="Label" parent="UI/Bottom/HBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(132, 0)
-layout_mode = 2
-text = "SPEED"
+[node name="Inventory" parent="UI" instance=ExtResource("4_o5nmd")]
 
-[node name="Targets" type="Label" parent="UI/Bottom/HBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(132, 0)
-layout_mode = 2
-
-[node name="Inventory" type="PanelContainer" parent="UI"]
-anchors_preset = 3
-anchor_left = 1.0
+[node name="Speedometre" type="PanelContainer" parent="UI"]
+anchors_preset = 7
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -265.0
-offset_top = -237.0
-offset_right = -17.0
-offset_bottom = -21.0
-grow_horizontal = 0
+offset_left = -66.0
+offset_top = -60.0
+offset_right = 66.0
+offset_bottom = -20.0
+grow_horizontal = 2
 grow_vertical = 0
-theme = SubResource("Theme_gevro")
+theme = ExtResource("4_te4fa")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Inventory"]
+[node name="CenterContainer" type="MarginContainer" parent="UI/Speedometre"]
 layout_mode = 2
 
-[node name="Cargo" type="Label" parent="UI/Inventory/VBoxContainer"]
-unique_name_in_owner = true
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Speedometre/CenterContainer"]
 layout_mode = 2
-text = "0/2700 m3"
+alignment = 1
 
-[node name="List" type="ScrollContainer" parent="UI/Inventory/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Inventory/VBoxContainer/List"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Entry" type="PanelContainer" parent="UI/Inventory/VBoxContainer/List/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Speedometre/CenterContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="GridContainer" type="HBoxContainer" parent="UI/Inventory/VBoxContainer/List/VBoxContainer/Entry"]
+[node name="TextureRect" type="TextureRect" parent="UI/Speedometre/CenterContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(12, 12)
 layout_mode = 2
-
-[node name="Icon" type="TextureRect" parent="UI/Inventory/VBoxContainer/List/VBoxContainer/Entry/GridContainer"]
-texture_filter = 5
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-texture = SubResource("AtlasTexture_3shd1")
+texture = SubResource("AtlasTexture_3yoyp")
 stretch_mode = 5
 
-[node name="Separator" type="VSeparator" parent="UI/Inventory/VBoxContainer/List/VBoxContainer/Entry/GridContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Speedometre/CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Speed" type="RichTextLabel" parent="UI/Speedometre/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(132, 0)
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+
+[node name="SpeedBar" type="ProgressBar" parent="UI/Speedometre/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+show_percentage = false
+
+[node name="Selection" type="PanelContainer" parent="UI"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 20.0
+offset_right = 200.0
+offset_bottom = 60.0
+grow_horizontal = 2
+theme = ExtResource("4_te4fa")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Selection"]
 layout_mode = 2
 
-[node name="Name" type="Label" parent="UI/Inventory/VBoxContainer/List/VBoxContainer/Entry/GridContainer"]
-layout_mode = 2
-text = "Ferroaster"
-
-[node name="Separator2" type="VSeparator" parent="UI/Inventory/VBoxContainer/List/VBoxContainer/Entry/GridContainer"]
-custom_minimum_size = Vector2(16, 0)
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Selection/MarginContainer"]
 layout_mode = 2
 
-[node name="Amount" type="Label" parent="UI/Inventory/VBoxContainer/List/VBoxContainer/Entry/GridContainer"]
+[node name="TextureRect" type="TextureRect" parent="UI/Selection/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
-text = "0"
+texture = SubResource("AtlasTexture_5pcmb")
+stretch_mode = 5
 
-[node name="Button" type="Button" parent="UI/Inventory/VBoxContainer/List/VBoxContainer/Entry"]
+[node name="Target" type="Label" parent="UI/Selection/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-flat = true
 
 [node name="Host" type="Button" parent="UI"]
 unique_name_in_owner = true
@@ -235,13 +230,14 @@ offset_bottom = 1175.0
 texture = SubResource("NoiseTexture2D_i8en0")
 stretch_mode = 1
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="BG"]
+scroll_ignore_camera_zoom = true
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="ParallaxLayer" type="ParallaxLayer" parent="BG/ParallaxBackground"]
 motion_scale = Vector2(0.2, 0.2)
 motion_mirroring = Vector2(512, 512)
 
-[node name="Dust" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+[node name="Dust" type="TextureRect" parent="BG/ParallaxBackground/ParallaxLayer"]
 offset_left = -3247.0
 offset_top = -1162.0
 offset_right = 3257.0

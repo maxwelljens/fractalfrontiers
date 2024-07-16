@@ -1,0 +1,48 @@
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://cnudye4assl6f"]
+
+[ext_resource type="FontFile" uid="uid://c5fpj6f4da1lb" path="res://font/iosevka_ss15_light.ttf" id="1_0xkx8"]
+[ext_resource type="FontFile" uid="uid://d4bjtil50nvm8" path="res://font/iosevka_ss15_semibold.ttf" id="2_gkwv6"]
+[ext_resource type="FontFile" uid="uid://cdwpsxct4wugb" path="res://font/iosevka_ss15_semibold_italic.ttf" id="3_ps84s"]
+[ext_resource type="FontFile" uid="uid://ko8idesbkujy" path="res://font/iosevka_ss15_light_italic.ttf" id="4_2mhin"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yp4x5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1boiw"]
+bg_color = Color(0.694534, 0.547537, 0, 0.0980392)
+skew = Vector2(0.6, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3ix5e"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6eets"]
+bg_color = Color(0.6, 0.6, 0.6, 0.0980392)
+skew = Vector2(0.6, 0)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_8n6li"]
+color = Color(0.164751, 0.164751, 0.164751, 1)
+grow_begin = -4.0
+grow_end = -4.0
+vertical = true
+
+[resource]
+Button/styles/focus = SubResource("StyleBoxEmpty_yp4x5")
+Button/styles/hover = SubResource("StyleBoxFlat_1boiw")
+Button/styles/normal = SubResource("StyleBoxEmpty_3ix5e")
+Button/styles/pressed = SubResource("StyleBoxFlat_6eets")
+Label/font_sizes/font_size = 14
+Label/fonts/font = ExtResource("1_0xkx8")
+MarginContainer/constants/margin_bottom = 0
+MarginContainer/constants/margin_left = 6
+MarginContainer/constants/margin_right = 6
+MarginContainer/constants/margin_top = 0
+RichTextLabel/font_sizes/bold_font_size = 14
+RichTextLabel/font_sizes/bold_italics_font_size = 14
+RichTextLabel/font_sizes/italics_font_size = 14
+RichTextLabel/font_sizes/mono_font_size = 14
+RichTextLabel/font_sizes/normal_font_size = 14
+RichTextLabel/fonts/bold_font = ExtResource("2_gkwv6")
+RichTextLabel/fonts/bold_italics_font = ExtResource("3_ps84s")
+RichTextLabel/fonts/italics_font = ExtResource("4_2mhin")
+RichTextLabel/fonts/mono_font = ExtResource("1_0xkx8")
+RichTextLabel/fonts/normal_font = ExtResource("1_0xkx8")
+VSeparator/constants/separation = 0
+VSeparator/styles/separator = SubResource("StyleBoxLine_8n6li")

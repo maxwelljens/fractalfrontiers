@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://mfqv438mljqk"]
 
-[ext_resource type="Script" path="res://player.gd" id="1_36kp7"]
+[ext_resource type="Script" path="res://nodes/entities/player.gd" id="1_36kp7"]
 [ext_resource type="Texture2D" uid="uid://s4to67ffk84f" path="res://art/ships.png" id="2_xem4q"]
 [ext_resource type="Script" path="res://nodes/rig.gd" id="3_4bv3y"]
-[ext_resource type="Script" path="res://nodes/player/control_input.gd" id="3_yyr7e"]
+[ext_resource type="Script" path="res://nodes/control_input.gd" id="3_yyr7e"]
 [ext_resource type="Script" path="res://nodes/selector.gd" id="5_2irkj"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mkb0g"]

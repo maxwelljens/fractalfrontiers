@@ -1,6 +1,6 @@
 class_name ItemsDB extends Resource
 
-const items := {
+const ITEMS := {
   "ferroaster": {
     "volume": 0.1,
     "mineral": "illidenium" 

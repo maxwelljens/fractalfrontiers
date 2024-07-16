@@ -1,0 +1,78 @@
+[gd_scene load_steps=5 format=3 uid="uid://lvluk472l87y"]
+
+[ext_resource type="Theme" uid="uid://cnudye4assl6f" path="res://nodes/ui/ui_theme.tres" id="1_yau77"]
+[ext_resource type="Script" path="res://nodes/ui/inventory.gd" id="2_bdeyy"]
+[ext_resource type="Texture2D" uid="uid://fnxa5na6nnpr" path="res://art/icons.png" id="2_vvj8r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3shd1"]
+atlas = ExtResource("2_vvj8r")
+region = Rect2(119, 125, 16, 16)
+
+[node name="Inventory" type="PanelContainer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -342.0
+offset_top = -237.0
+offset_right = -17.0
+offset_bottom = -21.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("1_yau77")
+script = ExtResource("2_bdeyy")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="CargoVolume" type="Label" parent="VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="List" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/List"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Entry" type="MarginContainer" parent="VBoxContainer/List/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="GridContainer" type="HBoxContainer" parent="VBoxContainer/List/VBoxContainer/Entry"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer/List/VBoxContainer/Entry/GridContainer"]
+texture_filter = 5
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = SubResource("AtlasTexture_3shd1")
+stretch_mode = 5
+
+[node name="EntryName" type="Label" parent="VBoxContainer/List/VBoxContainer/Entry/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Ferroaster"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/List/VBoxContainer/Entry/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="EntryAmount" type="RichTextLabel" parent="VBoxContainer/List/VBoxContainer/Entry/GridContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[right]100 [color=orange]m³[/color][/right]"
+fit_content = true
+
+[node name="Button" type="Button" parent="VBoxContainer/List/VBoxContainer/Entry"]
+layout_mode = 2
