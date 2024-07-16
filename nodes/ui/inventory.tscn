@@ -32,41 +32,43 @@ layout_mode = 2
 [node name="CargoVolume" type="Label" parent="VBoxContainer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+text = "CargoVolume"
 
-[node name="List" type="ScrollContainer" parent="VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/List"]
+[node name="List" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Entry" type="MarginContainer" parent="VBoxContainer/List/VBoxContainer"]
+[node name="Entry" type="MarginContainer" parent="VBoxContainer/ScrollContainer/List"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="GridContainer" type="HBoxContainer" parent="VBoxContainer/List/VBoxContainer/Entry"]
+[node name="GridContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/List/Entry"]
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="VBoxContainer/List/VBoxContainer/Entry/GridContainer"]
+[node name="Icon" type="TextureRect" parent="VBoxContainer/ScrollContainer/List/Entry/GridContainer"]
 texture_filter = 5
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 texture = SubResource("AtlasTexture_3shd1")
 stretch_mode = 5
 
-[node name="EntryName" type="Label" parent="VBoxContainer/List/VBoxContainer/Entry/GridContainer"]
+[node name="EntryName" type="Label" parent="VBoxContainer/ScrollContainer/List/Entry/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Ferroaster"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/List/VBoxContainer/Entry/GridContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/List/Entry/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="EntryAmount" type="RichTextLabel" parent="VBoxContainer/List/VBoxContainer/Entry/GridContainer/VBoxContainer"]
+[node name="EntryDetails" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/List/Entry/GridContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -74,5 +76,5 @@ bbcode_enabled = true
 text = "[right]100 [color=orange]m³[/color][/right]"
 fit_content = true
 
-[node name="Button" type="Button" parent="VBoxContainer/List/VBoxContainer/Entry"]
+[node name="Button" type="Button" parent="VBoxContainer/ScrollContainer/List/Entry"]
 layout_mode = 2

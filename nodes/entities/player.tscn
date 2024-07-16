@@ -33,6 +33,11 @@ texture = SubResource("AtlasTexture_4ay1r")
 
 [node name="Rig" type="Node" parent="."]
 script = ExtResource("3_4bv3y")
+powergrid = 215.0
+processor = 350.0
+capacitor = 375.0
+medium_slots = 5
+low_slots = 5
 max_speed = 130
 inertia_mod = 0.78
 warp_speed = 4.5

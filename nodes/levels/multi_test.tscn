@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cop56vjof0q5y"]
+[gd_scene load_steps=28 format=3 uid="uid://cop56vjof0q5y"]
 
 [ext_resource type="Script" path="res://nodes/levels/multitest.gd" id="1_gwi5h"]
 [ext_resource type="PackedScene" uid="uid://mfqv438mljqk" path="res://nodes/entities/player.tscn" id="2_fhm7r"]
@@ -15,6 +15,28 @@ region = Rect2(52, 167, 12, 12)
 [sub_resource type="AtlasTexture" id="AtlasTexture_5pcmb"]
 atlas = ExtResource("5_m8no2")
 region = Rect2(34, 125, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_201k3"]
+atlas = ExtResource("5_m8no2")
+region = Rect2(0, 142, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hw8rl"]
+atlas = ExtResource("5_m8no2")
+region = Rect2(17, 142, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eqa0q"]
+load_path = "res://.godot/imported/icons.png-7abd241791c0e1fc5898a3562b11b1bd.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n6g7g"]
+atlas = SubResource("CompressedTexture2D_eqa0q")
+region = Rect2(136, 108, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ej18b"]
+load_path = "res://.godot/imported/icons.png-7abd241791c0e1fc5898a3562b11b1bd.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6gkbr"]
+atlas = SubResource("CompressedTexture2D_ej18b")
+region = Rect2(170, 23, 16, 16)
 
 [sub_resource type="Gradient" id="Gradient_g225v"]
 colors = PackedColorArray(0.0142752, 0.0142752, 0.0142752, 1, 0, 0, 0, 1)
@@ -97,18 +119,6 @@ spawn_path = NodePath("Networked")
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource("4_xe4qk")
 
-[node name="Bottom" type="VBoxContainer" parent="UI"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/Bottom"]
-layout_mode = 2
-alignment = 1
-
 [node name="Inventory" parent="UI" instance=ExtResource("4_o5nmd")]
 
 [node name="Speedometre" type="PanelContainer" parent="UI"]
@@ -175,6 +185,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="UI/Selection/MarginContainer/HBoxContainer"]
+texture_filter = 5
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 texture = SubResource("AtlasTexture_5pcmb")
@@ -183,6 +194,66 @@ stretch_mode = 5
 [node name="Target" type="Label" parent="UI/Selection/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+
+[node name="Fittings" type="PanelContainer" parent="UI"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -90.0
+offset_top = -141.0
+offset_right = 90.0
+offset_bottom = -72.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("4_te4fa")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Fittings"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Fittings/MarginContainer"]
+layout_mode = 2
+
+[node name="HighSlots" type="HBoxContainer" parent="UI/Fittings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="UI/Fittings/MarginContainer/VBoxContainer/HighSlots"]
+modulate = Color(1, 1, 1, 0.352941)
+texture_filter = 5
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = SubResource("AtlasTexture_201k3")
+stretch_mode = 5
+
+[node name="Button" type="Button" parent="UI/Fittings/MarginContainer/VBoxContainer/HighSlots"]
+texture_filter = 5
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+icon = SubResource("AtlasTexture_hw8rl")
+expand_icon = true
+
+[node name="MidSlots" type="HBoxContainer" parent="UI/Fittings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="UI/Fittings/MarginContainer/VBoxContainer/MidSlots"]
+modulate = Color(1, 1, 1, 0.352941)
+texture_filter = 5
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = SubResource("AtlasTexture_n6g7g")
+stretch_mode = 5
+
+[node name="LowSlots" type="HBoxContainer" parent="UI/Fittings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="UI/Fittings/MarginContainer/VBoxContainer/LowSlots"]
+modulate = Color(1, 1, 1, 0.352941)
+texture_filter = 5
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = SubResource("AtlasTexture_6gkbr")
+stretch_mode = 5
 
 [node name="Host" type="Button" parent="UI"]
 unique_name_in_owner = true

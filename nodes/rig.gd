@@ -1,5 +1,13 @@
 class_name Rig extends Node
 
+@export_category("Fittings")
+@export var powergrid: float
+@export var processor: float
+@export var capacitor: float
+@export_range(0, 8) var high_slots: int = 2
+@export_range(0, 8) var medium_slots: int = 2
+@export_range(0, 8) var low_slots: int = 2
+
 @export_category("Navigation")
 @export var max_speed: int
 @export var inertia_mod: float
@@ -17,25 +25,22 @@ class_name Rig extends Node
 var items: Dictionary = items_data.ITEMS
 var cargo: Dictionary
 
+var ui: UI:
+  get: return UI.instance
+
 func add_items(to_add: Dictionary) -> void:
   for key in to_add.keys():
     if key in cargo:
+      # Add amount to existing cargo
       cargo[key]["amount"] += to_add[key]
+      # Calculate volume for convenience
+      cargo[key]["volume"] = _calculate_volume(key, cargo[key]["amount"])
     else:
+      # Make new entry
       cargo[key] = {"amount": to_add[key]}
+      cargo[key]["volume"] = _calculate_volume(key, cargo[key]["amount"])
+  ui.ui_inventory.update_interface(cargo) 
 
-func get_cargo(metadata := false) -> Dictionary:
-  var cargo_get: Dictionary
-  if metadata: pass
-  for item in cargo:
-    cargo_get[item] = cargo[item]["amount"]
-  return cargo_get
-
-func get_cargo_volume() -> Dictionary:
-  var cargo_volume: int
-  for item in cargo:
-    cargo_volume += cargo[item]["amount"] * items[item]["volume"]
-  return {
-    "cargo_volume": cargo_volume,
-    "cargo_capacity": cargo_capacity
-  }
+func _calculate_volume(item_name: String, amount: int) -> int:
+  # Calculate volume of item from ItemDB
+  return amount * items[item_name]["volume"]

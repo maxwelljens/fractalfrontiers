@@ -9,7 +9,6 @@ class_name Mineable extends Node
 
 func excavate(amount: int) -> Dictionary:
   quantity -= amount
-  print(quantity)
   if quantity <= 0:
     _destroy.rpc()
     return {type.to_lower(): quantity + amount}
