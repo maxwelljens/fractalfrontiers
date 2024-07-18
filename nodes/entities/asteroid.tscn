@@ -1,21 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://bap2gxbilpq0k"]
+[gd_scene load_steps=5 format=3 uid="uid://bap2gxbilpq0k"]
 
 [ext_resource type="Texture2D" uid="uid://b4u5riw8kcnyr" path="res://art/asteroid/asteroid1.png" id="1_rjulx"]
 [ext_resource type="Script" path="res://nodes/mineable.gd" id="2_n5307"]
 [ext_resource type="PackedScene" uid="uid://cy1vevbr2wdfw" path="res://nodes/selectable.tscn" id="3_41l7m"]
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_i33a4"]
-properties/0/path = NodePath("Mineable:quantity")
-properties/0/spawn = true
-properties/0/replication_mode = 2
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_a0ujn"]
 radius = 33.1913
 
 [node name="Asteroid" type="Area2D"]
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_i33a4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_rjulx")
@@ -25,7 +17,11 @@ position = Vector2(-1.5, -0.5)
 scale = Vector2(1.56, 1.6)
 shape = SubResource("CircleShape2D_a0ujn")
 
-[node name="Mineable" type="Node" parent="."]
+[node name="Mineable" type="Node" parent="." node_paths=PackedStringArray("parent_node", "selectable_node", "sprite_node")]
 script = ExtResource("2_n5307")
+parent_node = NodePath("..")
+selectable_node = NodePath("../Selectable")
+sprite_node = NodePath("../Sprite2D")
 
-[node name="Selectable" parent="." instance=ExtResource("3_41l7m")]
+[node name="Selectable" parent="." node_paths=PackedStringArray("parent_node") instance=ExtResource("3_41l7m")]
+parent_node = NodePath("..")

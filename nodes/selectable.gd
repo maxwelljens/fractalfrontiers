@@ -1,9 +1,8 @@
 class_name Selectable extends Node
 
-var parent_node: Node2D
+@export var parent_node: Node2D
 
 func _ready() -> void:
-  parent_node = get_parent()
   parent_node.input_event.connect(_on_parent_input_event)
   parent_node.mouse_entered.connect(_on_parent_mouse_entered)
   parent_node.mouse_exited.connect(_on_parent_mouse_exited)

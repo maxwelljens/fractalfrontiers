@@ -1,6 +1,11 @@
 class_name Rig extends Node
+## The node that constitutes the player's ship.
 
 const items: Dictionary = items_data.ITEMS
+
+@export_category("Resources")
+@export var player: Player
+@export var items_data: ItemsDB = preload("res://nodes/globals/items.tres")
 
 @export_category("Fittings")
 @export var powergrid: float
@@ -21,28 +26,22 @@ const items: Dictionary = items_data.ITEMS
 @export var volume: int
 @export var cargo_capacity: int
 
-@export_category("Resources")
-@export var items_data: ItemsDB = preload("res://nodes/globals/items.tres")
-
-signal cargo_updated
-
 var cargo: Dictionary
 
-var ui: UI:
-  get: return UI.instance
-
+## Add items to the cargohold of the rig
 func add_items(to_add: Dictionary) -> void:
   for key in to_add.keys():
     if key in cargo:
-      # Add amount to existing cargo
+      cargo[key]["icon"] = items[key]["icon"]
       cargo[key]["amount"] += to_add[key]
       # Calculate volume for convenience
       cargo[key]["volume"] = _calculate_volume(key, cargo[key]["amount"])
     else:
       # Make new entry
       cargo[key] = {"amount": to_add[key]}
+      cargo[key]["icon"] = items[key]["icon"]
       cargo[key]["volume"] = _calculate_volume(key, cargo[key]["amount"])
-  cargo_updated.emit()
+  player.cargo_updated.emit()
 
 func _calculate_volume(item_name: String, amount: int) -> int:
   # Calculate volume of item from ItemDB

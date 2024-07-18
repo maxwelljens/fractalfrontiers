@@ -2,11 +2,9 @@
 
 [ext_resource type="Theme" uid="uid://cnudye4assl6f" path="res://nodes/ui/ui_theme.tres" id="1_yau77"]
 [ext_resource type="Script" path="res://nodes/ui/inventory.gd" id="2_bdeyy"]
-[ext_resource type="Texture2D" uid="uid://dji8262s7jcsv" path="res://art/ff_icons_large.png" id="3_cqckg"]
+[ext_resource type="Texture2D" uid="uid://dsiju720445yn" path="res://art/icons/ore_minerals/ferroaster.tres" id="3_jkl24"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3shd1"]
-atlas = ExtResource("3_cqckg")
-region = Rect2(0, 0, 128, 128)
+[sub_resource type="RichTextEffect" id="RichTextEffect_0t4bh"]
 
 [node name="Inventory" type="PanelContainer"]
 anchors_preset = 3
@@ -50,11 +48,13 @@ layout_mode = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/List/Entry"]
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="VBoxContainer/ScrollContainer/List/Entry/HBoxContainer"]
+[node name="EntryIcon" type="TextureRect" parent="VBoxContainer/ScrollContainer/List/Entry/HBoxContainer"]
+unique_name_in_owner = true
 texture_filter = 4
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-texture = SubResource("AtlasTexture_3shd1")
+size_flags_vertical = 4
+texture = ExtResource("3_jkl24")
 expand_mode = 2
 stretch_mode = 5
 
@@ -75,6 +75,7 @@ size_flags_horizontal = 3
 bbcode_enabled = true
 text = "[right]100 [color=orange]m³[/color][/right]"
 fit_content = true
+custom_effects = [SubResource("RichTextEffect_0t4bh")]
 
 [node name="Button" type="Button" parent="VBoxContainer/ScrollContainer/List/Entry"]
 layout_mode = 2

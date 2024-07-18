@@ -1,28 +1,28 @@
 [gd_scene load_steps=28 format=3 uid="uid://cop56vjof0q5y"]
 
-[ext_resource type="Script" path="res://nodes/levels/multitest.gd" id="1_gwi5h"]
-[ext_resource type="PackedScene" uid="uid://mfqv438mljqk" path="res://nodes/entities/player.tscn" id="2_fhm7r"]
-[ext_resource type="PackedScene" uid="uid://bap2gxbilpq0k" path="res://nodes/entities/asteroid.tscn" id="3_jd480"]
-[ext_resource type="PackedScene" uid="uid://lvluk472l87y" path="res://nodes/ui/inventory.tscn" id="4_o5nmd"]
-[ext_resource type="Theme" uid="uid://cnudye4assl6f" path="res://nodes/ui/ui_theme.tres" id="4_te4fa"]
-[ext_resource type="Script" path="res://nodes/ui.gd" id="4_xe4qk"]
-[ext_resource type="Texture2D" uid="uid://fnxa5na6nnpr" path="res://art/icons.png" id="5_m8no2"]
+[ext_resource type="Script" path="res://nodes/ui.gd" id="1_bksbo"]
+[ext_resource type="PackedScene" uid="uid://lvluk472l87y" path="res://nodes/ui/inventory.tscn" id="2_dt4qo"]
+[ext_resource type="Theme" uid="uid://cnudye4assl6f" path="res://nodes/ui/ui_theme.tres" id="3_fx1ib"]
+[ext_resource type="Texture2D" uid="uid://fnxa5na6nnpr" path="res://art/icons.png" id="4_q7xnt"]
+[ext_resource type="Texture2D" uid="uid://dji8262s7jcsv" path="res://art/atlas/ff_icons_large.png" id="5_1q1sv"]
+[ext_resource type="PackedScene" uid="uid://bap2gxbilpq0k" path="res://nodes/entities/asteroid.tscn" id="5_r1ia8"]
+[ext_resource type="PackedScene" uid="uid://mfqv438mljqk" path="res://nodes/entities/player.tscn" id="6_w342s"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3yoyp"]
-atlas = ExtResource("5_m8no2")
+atlas = ExtResource("4_q7xnt")
 region = Rect2(52, 167, 12, 12)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5pcmb"]
-atlas = ExtResource("5_m8no2")
+atlas = ExtResource("4_q7xnt")
 region = Rect2(34, 125, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_201k3"]
-atlas = ExtResource("5_m8no2")
+atlas = ExtResource("4_q7xnt")
 region = Rect2(0, 142, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hw8rl"]
-atlas = ExtResource("5_m8no2")
-region = Rect2(17, 142, 16, 16)
+atlas = ExtResource("5_1q1sv")
+region = Rect2(0, 256, 128, 128)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eqa0q"]
 load_path = "res://.godot/imported/icons.png-7abd241791c0e1fc5898a3562b11b1bd.ctex"
@@ -106,21 +106,14 @@ generate_mipmaps = false
 color_ramp = SubResource("Gradient_rwq3g")
 noise = SubResource("FastNoiseLite_sghe1")
 
-[node name="MultiTest" type="Node2D"]
-script = ExtResource("1_gwi5h")
-player_scene = ExtResource("2_fhm7r")
+[node name="FFTest" type="Node2D"]
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://nodes/entities/player.tscn")
-spawn_path = NodePath("Networked")
+[node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("1_bksbo")
+player = NodePath("../Player")
 
-[node name="Networked" type="Node2D" parent="MultiplayerSpawner"]
-
-[node name="UI" type="CanvasLayer" parent="."]
-script = ExtResource("4_xe4qk")
-
-[node name="Inventory" parent="UI" node_paths=PackedStringArray("spawner") instance=ExtResource("4_o5nmd")]
-spawner = NodePath("../../MultiplayerSpawner")
+[node name="Inventory" parent="UI" node_paths=PackedStringArray("ui") instance=ExtResource("2_dt4qo")]
+ui = NodePath("..")
 
 [node name="Speedometre" type="PanelContainer" parent="UI"]
 anchors_preset = 7
@@ -134,7 +127,7 @@ offset_right = 66.0
 offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 0
-theme = ExtResource("4_te4fa")
+theme = ExtResource("3_fx1ib")
 
 [node name="CenterContainer" type="MarginContainer" parent="UI/Speedometre"]
 layout_mode = 2
@@ -177,7 +170,7 @@ offset_top = 20.0
 offset_right = 200.0
 offset_bottom = 60.0
 grow_horizontal = 2
-theme = ExtResource("4_te4fa")
+theme = ExtResource("3_fx1ib")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/Selection"]
 layout_mode = 2
@@ -208,7 +201,7 @@ offset_right = 90.0
 offset_bottom = -72.0
 grow_horizontal = 2
 grow_vertical = 0
-theme = ExtResource("4_te4fa")
+theme = ExtResource("3_fx1ib")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/Fittings"]
 layout_mode = 2
@@ -228,7 +221,7 @@ texture = SubResource("AtlasTexture_201k3")
 stretch_mode = 5
 
 [node name="Button" type="Button" parent="UI/Fittings/MarginContainer/VBoxContainer/HighSlots"]
-texture_filter = 5
+texture_filter = 4
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 icon = SubResource("AtlasTexture_hw8rl")
@@ -256,24 +249,10 @@ layout_mode = 2
 texture = SubResource("AtlasTexture_6gkbr")
 stretch_mode = 5
 
-[node name="Host" type="Button" parent="UI"]
-unique_name_in_owner = true
-offset_left = 99.0
-offset_top = 286.0
-offset_right = 143.0
-offset_bottom = 317.0
-text = "Host"
-
-[node name="Join" type="Button" parent="UI"]
-unique_name_in_owner = true
-offset_left = 99.0
-offset_top = 324.0
-offset_right = 137.0
-offset_bottom = 355.0
-text = "Join"
-
-[node name="Asteroid" parent="." instance=ExtResource("3_jd480")]
+[node name="Asteroid" parent="." instance=ExtResource("5_r1ia8")]
 position = Vector2(162, 2)
+
+[node name="Player" parent="." instance=ExtResource("6_w342s")]
 
 [node name="BG" type="CanvasLayer" parent="."]
 layer = -100
@@ -316,7 +295,3 @@ offset_right = 3257.0
 offset_bottom = 1182.0
 texture = SubResource("NoiseTexture2D_rlbu5")
 stretch_mode = 1
-
-[connection signal="spawned" from="MultiplayerSpawner" to="." method="_on_multiplayer_spawner_spawned"]
-[connection signal="pressed" from="UI/Host" to="." method="_on_host_pressed"]
-[connection signal="pressed" from="UI/Join" to="." method="_on_join_pressed"]

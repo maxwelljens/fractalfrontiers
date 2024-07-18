@@ -1,45 +1,41 @@
 class_name Inventory extends PanelContainer
 
-@export var spawner: MultiplayerSpawner 
+@export var ui: UI 
+@onready var player: Player = ui.player
 @onready var cargo_volume: Label = %CargoVolume
 @onready var list: VBoxContainer = %List
 @onready var entry: MarginContainer = %Entry
+@onready var entry_icon: TextureRect = %EntryIcon
 @onready var entry_name: Label = %EntryName
 @onready var entry_details: RichTextLabel = %EntryDetails
 
-var player: Player:
-  get: return Player.instance
-
 func _ready() -> void:
-  if not multiplayer.is_server():
-    spawner.spawned.connect(_connect_sig_to_player)
-  else:
-    spawner.find_child("Networked").child_entered_tree.connect(_connect_sig_to_player)
+  player.cargo_updated.connect(_update_interface)
+  _update_interface()
 
-func _connect_sig_to_player(node: Node):
-  if node is Player:
-    await get_tree().process_frame
-    player.rig.cargo_updated.connect(_update_interface)
-    _update_interface(player.rig.cargo)
-
-func _update_interface(cargo: Dictionary) -> void:
+func _update_interface() -> void:
+  # Make sure template Entry stays invisible
+  entry.visible = false
   # Refresh list
   for child in list.get_children():
     if child == entry: continue 
     child.queue_free()
     
   # Update UI from information of a Rig.cargo
-  var total_item_volume: float
+  var cargo: Dictionary = player.rig.cargo
+  var total_item_volume := 0.0
   for item_key in cargo.keys():
     var item_name: String = item_key.capitalize()
+    var item_icon: Resource = load(cargo[item_key]["icon"])
     var item_amount: int = cargo[item_key]["amount"]
     var item_volume: float = cargo[item_key]["volume"]
     total_item_volume += item_volume
     # Set up invisible Entry with relevant information, then duplicate and parent to List
     entry_name.text = item_name 
-    entry_details.text = "[right]%s [color=darkgray]/ %s m³[/color][/right]" % [item_amount, item_volume]
+    entry_icon.texture = item_icon
+    entry_details.text = "[right]%s [color=#a89984]/ %s m³[/color][/right]" % [item_amount, item_volume]
     var new_entry = entry.duplicate()
-    $VBoxContainer/ScrollContainer/List.add_child(new_entry)
+    list.add_child(new_entry)
     # Make new entry visible
     new_entry.visible = true 
   

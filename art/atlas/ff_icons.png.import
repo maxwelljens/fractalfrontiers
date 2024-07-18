@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://di6e5v84umaij"
-path="res://.godot/imported/ff_icons.png-dd3823574dc7a29afc1a016e9d6934cf.ctex"
+path="res://.godot/imported/ff_icons.png-a83e3b51158a4422790008adfcd14331.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/ff_icons.png"
-dest_files=["res://.godot/imported/ff_icons.png-dd3823574dc7a29afc1a016e9d6934cf.ctex"]
+source_file="res://art/atlas/ff_icons.png"
+dest_files=["res://.godot/imported/ff_icons.png-a83e3b51158a4422790008adfcd14331.ctex"]
 
 [params]
 

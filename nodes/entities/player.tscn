@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://mfqv438mljqk"]
+[gd_scene load_steps=7 format=3 uid="uid://mfqv438mljqk"]
 
 [ext_resource type="Script" path="res://nodes/entities/player.gd" id="1_36kp7"]
 [ext_resource type="Texture2D" uid="uid://s4to67ffk84f" path="res://art/ships.png" id="2_xem4q"]
@@ -6,33 +6,25 @@
 [ext_resource type="Script" path="res://nodes/control_input.gd" id="3_yyr7e"]
 [ext_resource type="Script" path="res://nodes/selector.gd" id="5_2irkj"]
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mkb0g"]
-properties/0/path = NodePath(".:position")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-properties/1/path = NodePath(".:rotation")
-properties/1/spawn = true
-properties/1/replication_mode = 1
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ay1r"]
 atlas = ExtResource("2_xem4q")
 region = Rect2(160, 64, 22, 60)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("camera", "input_control")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("camera", "rig", "control", "selector")]
 script = ExtResource("1_36kp7")
 camera = NodePath("Camera2D")
-input_control = NodePath("Control")
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_mkb0g")
+rig = NodePath("Rig")
+control = NodePath("InputControl")
+selector = NodePath("Selector")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 3
 rotation = 1.5708
 texture = SubResource("AtlasTexture_4ay1r")
 
-[node name="Rig" type="Node" parent="."]
+[node name="Rig" type="Node" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("3_4bv3y")
+player = NodePath("..")
 powergrid = 215.0
 processor = 350.0
 capacitor = 375.0
@@ -46,8 +38,9 @@ mass = 11250000
 volume = 240000
 cargo_capacity = 2700
 
-[node name="Control" type="Node" parent="."]
+[node name="InputControl" type="Node" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("3_yyr7e")
+player = NodePath("..")
 
 [node name="Selector" type="Node2D" parent="."]
 script = ExtResource("5_2irkj")
