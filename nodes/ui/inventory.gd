@@ -1,6 +1,6 @@
 class_name Inventory extends PanelContainer
 
-@export var networked_node: Node2D
+@export var spawner: MultiplayerSpawner 
 @onready var cargo_volume: Label = %CargoVolume
 @onready var list: VBoxContainer = %List
 @onready var entry: MarginContainer = %Entry
@@ -11,14 +11,16 @@ var player: Player:
   get: return Player.instance
 
 func _ready() -> void:
-  if player == null:
-    networked_node.child_entered_tree.connect(_connect_sig_to_player)
+  if not multiplayer.is_server():
+    spawner.spawned.connect(_connect_sig_to_player)
   else:
-    player.cargo_updated.connect(_update_interface)
+    spawner.find_child("Networked").child_entered_tree.connect(_connect_sig_to_player)
 
 func _connect_sig_to_player(node: Node):
   if node is Player:
-    player.cargo_updated.connect(_update_interface)
+    await get_tree().process_frame
+    player.rig.cargo_updated.connect(_update_interface)
+    _update_interface(player.rig.cargo)
 
 func _update_interface(cargo: Dictionary) -> void:
   # Refresh list
