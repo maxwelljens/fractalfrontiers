@@ -2,11 +2,11 @@
 
 [ext_resource type="Theme" uid="uid://cnudye4assl6f" path="res://nodes/ui/ui_theme.tres" id="1_yau77"]
 [ext_resource type="Script" path="res://nodes/ui/inventory.gd" id="2_bdeyy"]
-[ext_resource type="Texture2D" uid="uid://fnxa5na6nnpr" path="res://art/icons.png" id="2_vvj8r"]
+[ext_resource type="Texture2D" uid="uid://dji8262s7jcsv" path="res://art/ff_icons_large.png" id="3_cqckg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3shd1"]
-atlas = ExtResource("2_vvj8r")
-region = Rect2(119, 125, 16, 16)
+atlas = ExtResource("3_cqckg")
+region = Rect2(0, 0, 128, 128)
 
 [node name="Inventory" type="PanelContainer"]
 anchors_preset = 3
@@ -45,30 +45,30 @@ size_flags_horizontal = 3
 
 [node name="Entry" type="MarginContainer" parent="VBoxContainer/ScrollContainer/List"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 
-[node name="GridContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/List/Entry"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/List/Entry"]
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="VBoxContainer/ScrollContainer/List/Entry/GridContainer"]
-texture_filter = 5
-custom_minimum_size = Vector2(16, 16)
+[node name="Icon" type="TextureRect" parent="VBoxContainer/ScrollContainer/List/Entry/HBoxContainer"]
+texture_filter = 4
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 texture = SubResource("AtlasTexture_3shd1")
+expand_mode = 2
 stretch_mode = 5
 
-[node name="EntryName" type="Label" parent="VBoxContainer/ScrollContainer/List/Entry/GridContainer"]
+[node name="EntryName" type="Label" parent="VBoxContainer/ScrollContainer/List/Entry/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Ferroaster"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/List/Entry/GridContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/List/Entry/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="EntryDetails" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/List/Entry/GridContainer/VBoxContainer"]
+[node name="EntryDetails" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/List/Entry/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3

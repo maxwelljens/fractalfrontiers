@@ -1,17 +1,24 @@
 class_name Inventory extends PanelContainer
 
+@export var networked_node: Node2D
 @onready var cargo_volume: Label = %CargoVolume
 @onready var list: VBoxContainer = %List
 @onready var entry: MarginContainer = %Entry
 @onready var entry_name: Label = %EntryName
 @onready var entry_details: RichTextLabel = %EntryDetails
 
-var player_rig: Rig:
-  get: return Player.instance.rig
+var player: Player:
+  get: return Player.instance
 
 func _ready() -> void:
-  await get_tree().process_frame
-  player_rig.cargo_updated.connect(_update_interface)
+  if player == null:
+    networked_node.child_entered_tree.connect(_connect_sig_to_player)
+  else:
+    player.cargo_updated.connect(_update_interface)
+
+func _connect_sig_to_player(node: Node):
+  if node is Player:
+    player.cargo_updated.connect(_update_interface)
 
 func _update_interface(cargo: Dictionary) -> void:
   # Refresh list
@@ -35,4 +42,4 @@ func _update_interface(cargo: Dictionary) -> void:
     new_entry.visible = true 
   
   # Update total cargo volume / cargo capacity label
-  cargo_volume.text = "%s/%s m³" % [total_item_volume, player_rig.cargo_capacity]
+  cargo_volume.text = "%s/%s m³" % [total_item_volume, player.rig.cargo_capacity]

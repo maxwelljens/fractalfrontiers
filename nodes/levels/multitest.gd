@@ -2,8 +2,9 @@ class_name NetworkManager extends Node2D
 
 @onready var host_button: Button = %Host
 @onready var join_button: Button = %Join
-static var peer = ENetMultiplayerPeer.new()
+@onready var networked: Node2D = $MultiplayerSpawner/Networked
 @export var player_scene: PackedScene
+static var peer = ENetMultiplayerPeer.new()
 
 func _on_host_pressed():
   peer.create_server(2010)
