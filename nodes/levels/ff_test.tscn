@@ -1,11 +1,11 @@
-[gd_scene load_steps=28 format=3 uid="uid://cop56vjof0q5y"]
+[gd_scene load_steps=22 format=3 uid="uid://cop56vjof0q5y"]
 
 [ext_resource type="Script" path="res://nodes/ui.gd" id="1_bksbo"]
 [ext_resource type="PackedScene" uid="uid://lvluk472l87y" path="res://nodes/ui/inventory.tscn" id="2_dt4qo"]
 [ext_resource type="Theme" uid="uid://cnudye4assl6f" path="res://nodes/ui/ui_theme.tres" id="3_fx1ib"]
 [ext_resource type="Texture2D" uid="uid://fnxa5na6nnpr" path="res://art/icons.png" id="4_q7xnt"]
-[ext_resource type="Texture2D" uid="uid://dji8262s7jcsv" path="res://art/atlas/ff_icons_large.png" id="5_1q1sv"]
 [ext_resource type="PackedScene" uid="uid://bap2gxbilpq0k" path="res://nodes/entities/asteroid.tscn" id="5_r1ia8"]
+[ext_resource type="PackedScene" uid="uid://bp4wl33rlvtd8" path="res://nodes/ui/fittings.tscn" id="5_w5e3k"]
 [ext_resource type="PackedScene" uid="uid://mfqv438mljqk" path="res://nodes/entities/player.tscn" id="6_w342s"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3yoyp"]
@@ -15,28 +15,6 @@ region = Rect2(52, 167, 12, 12)
 [sub_resource type="AtlasTexture" id="AtlasTexture_5pcmb"]
 atlas = ExtResource("4_q7xnt")
 region = Rect2(34, 125, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_201k3"]
-atlas = ExtResource("4_q7xnt")
-region = Rect2(0, 142, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hw8rl"]
-atlas = ExtResource("5_1q1sv")
-region = Rect2(0, 256, 128, 128)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eqa0q"]
-load_path = "res://.godot/imported/icons.png-7abd241791c0e1fc5898a3562b11b1bd.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_n6g7g"]
-atlas = SubResource("CompressedTexture2D_eqa0q")
-region = Rect2(136, 108, 16, 16)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ej18b"]
-load_path = "res://.godot/imported/icons.png-7abd241791c0e1fc5898a3562b11b1bd.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6gkbr"]
-atlas = SubResource("CompressedTexture2D_ej18b")
-region = Rect2(170, 23, 16, 16)
 
 [sub_resource type="Gradient" id="Gradient_g225v"]
 colors = PackedColorArray(0.0142752, 0.0142752, 0.0142752, 1, 0, 0, 0, 1)
@@ -189,65 +167,8 @@ stretch_mode = 5
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Fittings" type="PanelContainer" parent="UI"]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -90.0
-offset_top = -141.0
-offset_right = 90.0
-offset_bottom = -72.0
-grow_horizontal = 2
-grow_vertical = 0
-theme = ExtResource("3_fx1ib")
-
-[node name="MarginContainer" type="MarginContainer" parent="UI/Fittings"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Fittings/MarginContainer"]
-layout_mode = 2
-
-[node name="HighSlots" type="HBoxContainer" parent="UI/Fittings/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="UI/Fittings/MarginContainer/VBoxContainer/HighSlots"]
-modulate = Color(1, 1, 1, 0.352941)
-texture_filter = 5
-custom_minimum_size = Vector2(16, 16)
-layout_mode = 2
-texture = SubResource("AtlasTexture_201k3")
-stretch_mode = 5
-
-[node name="Button" type="Button" parent="UI/Fittings/MarginContainer/VBoxContainer/HighSlots"]
-texture_filter = 4
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-icon = SubResource("AtlasTexture_hw8rl")
-expand_icon = true
-
-[node name="MidSlots" type="HBoxContainer" parent="UI/Fittings/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="UI/Fittings/MarginContainer/VBoxContainer/MidSlots"]
-modulate = Color(1, 1, 1, 0.352941)
-texture_filter = 5
-custom_minimum_size = Vector2(16, 16)
-layout_mode = 2
-texture = SubResource("AtlasTexture_n6g7g")
-stretch_mode = 5
-
-[node name="LowSlots" type="HBoxContainer" parent="UI/Fittings/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="UI/Fittings/MarginContainer/VBoxContainer/LowSlots"]
-modulate = Color(1, 1, 1, 0.352941)
-texture_filter = 5
-custom_minimum_size = Vector2(16, 16)
-layout_mode = 2
-texture = SubResource("AtlasTexture_6gkbr")
-stretch_mode = 5
+[node name="Fittings" parent="UI" node_paths=PackedStringArray("ui") instance=ExtResource("5_w5e3k")]
+ui = NodePath("..")
 
 [node name="Asteroid" parent="." instance=ExtResource("5_r1ia8")]
 position = Vector2(162, 2)

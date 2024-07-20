@@ -9,5 +9,13 @@ const ITEMS := {
   "illdenium": {
     "icon": "res://art/icons/ore_minerals/illidenium.tres",
     "volume": 0.01,
+  },
+  "mining_cannon": {
+    "icon": "res://art/icons/turrets/mining/mining_cannon.tres",
+    "function": "mine",
+    "slot": "high",
+    "cycle": 60.0,
+    "cpu": 60.0,
+    "powergrid": 2.0,
   }
 }

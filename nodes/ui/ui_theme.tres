@@ -1,21 +1,44 @@
-[gd_resource type="Theme" load_steps=11 format=3 uid="uid://cnudye4assl6f"]
+[gd_resource type="Theme" load_steps=12 format=3 uid="uid://cnudye4assl6f"]
 
 [ext_resource type="FontFile" uid="uid://c5fpj6f4da1lb" path="res://font/iosevka_ss15_light.ttf" id="1_0xkx8"]
 [ext_resource type="FontFile" uid="uid://d4bjtil50nvm8" path="res://font/iosevka_ss15_semibold.ttf" id="2_gkwv6"]
 [ext_resource type="FontFile" uid="uid://cdwpsxct4wugb" path="res://font/iosevka_ss15_semibold_italic.ttf" id="3_ps84s"]
 [ext_resource type="FontFile" uid="uid://ko8idesbkujy" path="res://font/iosevka_ss15_light_italic.ttf" id="4_2mhin"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ufjr"]
+bg_color = Color(0, 0, 0, 0.196078)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yp4x5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1boiw"]
 bg_color = Color(0.694534, 0.547537, 0, 0.0980392)
-skew = Vector2(0.6, 0)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3ix5e"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6eets"]
 bg_color = Color(0.6, 0.6, 0.6, 0.0980392)
-skew = Vector2(0.6, 0)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+shadow_color = Color(0, 0, 0, 0.196078)
+shadow_size = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i7m42"]
 bg_color = Color(0.156863, 0.156863, 0.156863, 1)
@@ -41,6 +64,7 @@ grow_end = -4.0
 vertical = true
 
 [resource]
+Button/styles/disabled = SubResource("StyleBoxFlat_7ufjr")
 Button/styles/focus = SubResource("StyleBoxEmpty_yp4x5")
 Button/styles/hover = SubResource("StyleBoxFlat_1boiw")
 Button/styles/normal = SubResource("StyleBoxEmpty_3ix5e")

@@ -28,7 +28,6 @@ player = NodePath("..")
 powergrid = 215.0
 processor = 350.0
 capacitor = 375.0
-medium_slots = 5
 low_slots = 5
 max_speed = 130
 inertia_mod = 0.78

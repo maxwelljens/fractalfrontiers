@@ -1,4 +1,4 @@
-class_name Inventory extends PanelContainer
+class_name UIInventory extends PanelContainer
 
 @export var ui: UI 
 @onready var player: Player = ui.player
