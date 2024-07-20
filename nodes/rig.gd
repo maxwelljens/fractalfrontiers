@@ -37,15 +37,17 @@ var fittings := {
   }
 }
 
-func mine() -> void:
+func mine() -> SceneTreeTimer:
   if Selector.instance.selection != null and Selector.instance.selection.has_node("Mineable"):
-    cycle(2.0)
+    return cycle(2.0)
   elif Selector.instance.selection != null and not Selector.instance.selection.has_node("Mineable"):
     print("Not mineable")
+  elif Selector.instance.selection == null:
+    print("Nothing selected")
+  return null
 
-func cycle(time: float) -> void:
-  var new_cycler: SceneTreeTimer = get_tree().create_timer(time)
-  player.cycle_started.emit(new_cycler)
+func cycle(time: float) -> SceneTreeTimer:
+  return get_tree().create_timer(time)
 
 ## Add fitting to Rig
 func add_fitting(to_add: String) -> void:

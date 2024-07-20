@@ -60,9 +60,12 @@ func _populate_slot_arrays() -> void:
           ls.add_child(template)
           ls_slots.append(template)
 
-# TODO: Do the cycling logic for each button
 func button_pressed(button: Button) -> void:
-  var cycler: SceneTreeTimer 
-  var cycle_max_time: float
-  button.get_node("../CycleBar").value = cycle_max_time - cycler.time_left
-  player.rig.mine()
+  var cycler: SceneTreeTimer = player.rig.mine()
+  if cycler == null: return
+  var cycle_bar: TextureProgressBar =  button.get_node("../CycleBar")
+  cycle_bar.max_value = cycler.time_left
+  while cycler.time_left > 0:
+    cycle_bar.value = cycle_bar.max_value - cycler.time_left
+    await get_tree().physics_frame
+  cycle_bar.value = 0
