@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://cnudye4assl6f" path="res://nodes/ui/ui_theme.tres" id="1_nday2"]
 [ext_resource type="Script" path="res://nodes/ui/fittings.gd" id="2_ddwyt"]
 [ext_resource type="Texture2D" uid="uid://cjlgjlahh4s4h" path="res://art/progress_round.png" id="3_8nl3k"]
-[ext_resource type="Script" path="res://nodes/ui/button_test.gd" id="4_1qkoq"]
+[ext_resource type="Script" path="res://nodes/ui/fitting_container.gd" id="3_f3r0p"]
 
 [node name="Fittings" type="PanelContainer"]
 anchors_preset = 7
@@ -20,25 +20,21 @@ grow_vertical = 0
 theme = ExtResource("1_nday2")
 script = ExtResource("2_ddwyt")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 2
-
-[node name="HighSlots" type="HBoxContainer" parent="VBoxContainer"]
+[node name="FittingContainer" type="CenterContainer" parent="." node_paths=PackedStringArray("fittings")]
 unique_name_in_owner = true
-layout_mode = 2
-
-[node name="HSFitting" type="CenterContainer" parent="VBoxContainer/HighSlots"]
 visible = false
 layout_mode = 2
+script = ExtResource("3_f3r0p")
+fittings = NodePath("..")
 
-[node name="Blank" type="TextureRect" parent="VBoxContainer/HighSlots/HSFitting"]
+[node name="Blank" type="TextureRect" parent="FittingContainer"]
 modulate = Color(0, 0, 0, 0.235294)
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 texture = ExtResource("3_8nl3k")
 expand_mode = 3
 
-[node name="CycleBar" type="TextureProgressBar" parent="VBoxContainer/HighSlots/HSFitting"]
+[node name="CycleBar" type="TextureProgressBar" parent="FittingContainer"]
 texture_filter = 4
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
@@ -48,75 +44,26 @@ nine_patch_stretch = true
 texture_progress = ExtResource("3_8nl3k")
 tint_progress = Color(0.839216, 0.364706, 0.054902, 1)
 
-[node name="Button" type="Button" parent="VBoxContainer/HighSlots/HSFitting" node_paths=PackedStringArray("fittings")]
+[node name="Button" type="Button" parent="FittingContainer"]
 texture_filter = 4
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 disabled = true
 expand_icon = true
-script = ExtResource("4_1qkoq")
-fittings = NodePath("../../../..")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HighSlots" type="HBoxContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
 
 [node name="MidSlots" type="HBoxContainer" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="MSFitting" type="CenterContainer" parent="VBoxContainer/MidSlots"]
-visible = false
-layout_mode = 2
-
-[node name="Blank" type="TextureRect" parent="VBoxContainer/MidSlots/MSFitting"]
-modulate = Color(0, 0, 0, 0.235294)
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-texture = ExtResource("3_8nl3k")
-expand_mode = 3
-
-[node name="CycleBar" type="TextureProgressBar" parent="VBoxContainer/MidSlots/MSFitting"]
-texture_filter = 4
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-fill_mode = 5
-nine_patch_stretch = true
-texture_progress = ExtResource("3_8nl3k")
-tint_progress = Color(0.839216, 0.364706, 0.054902, 1)
-
-[node name="Button" type="Button" parent="VBoxContainer/MidSlots/MSFitting"]
-texture_filter = 4
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-disabled = true
-expand_icon = true
-
 [node name="LowSlots" type="HBoxContainer" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="LSFitting" type="CenterContainer" parent="VBoxContainer/LowSlots"]
-visible = false
-layout_mode = 2
-
-[node name="Blank" type="TextureRect" parent="VBoxContainer/LowSlots/LSFitting"]
-modulate = Color(0, 0, 0, 0.235294)
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-texture = ExtResource("3_8nl3k")
-expand_mode = 3
-
-[node name="CycleBar" type="TextureProgressBar" parent="VBoxContainer/LowSlots/LSFitting"]
-texture_filter = 4
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-fill_mode = 5
-nine_patch_stretch = true
-texture_progress = ExtResource("3_8nl3k")
-tint_progress = Color(0.839216, 0.364706, 0.054902, 1)
-
-[node name="Button" type="Button" parent="VBoxContainer/LowSlots/LSFitting"]
-texture_filter = 4
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-disabled = true
-expand_icon = true
-
-[connection signal="pressed" from="VBoxContainer/HighSlots/HSFitting/Button" to="VBoxContainer/HighSlots/HSFitting/Button" method="_on_pressed"]
+[connection signal="pressed" from="FittingContainer/Button" to="FittingContainer" method="_on_button_pressed"]

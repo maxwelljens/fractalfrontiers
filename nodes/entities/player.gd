@@ -1,5 +1,6 @@
 class_name Player extends CharacterBody2D
 
+@export var ui: UI
 @export var camera: Camera2D
 @export var rig: Rig
 @export var control: InputControl
@@ -7,7 +8,8 @@ class_name Player extends CharacterBody2D
 var speed: float
 var ore: int
 
-signal cycle_started(slot: int, cycler: SceneTreeTimer)
+signal cycle_started(slot: int, cycle: SceneTreeTimer)
+signal cycle_ended(slot: int)
 signal cargo_updated
 signal fitting_updated
 
@@ -18,7 +20,6 @@ func _physics_process(_delta):
   if Input.is_action_pressed("ui_accept") and selector.selection:
     _draw_line()
   if Input.is_action_just_released("ui_accept") and selector.selection:
-    rig.mine()
     $Line2D.clear_points()
     var mineable_node: Mineable = selector.selection.find_child("Mineable")
     rig.add_items(mineable_node.excavate(200))

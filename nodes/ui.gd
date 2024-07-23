@@ -5,6 +5,8 @@ class_name UI extends CanvasLayer
 @onready var ui_speedbar: ProgressBar = %SpeedBar
 @onready var ui_target: Label = %Target
 
+signal fitting_button_pressed(slot: int)
+
 func _physics_process(_delta):
   if player.selector.selection is Node:
     ui_target.text = player.selector.selection.name

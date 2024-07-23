@@ -173,7 +173,8 @@ ui = NodePath("..")
 [node name="Asteroid" parent="." instance=ExtResource("5_r1ia8")]
 position = Vector2(162, 2)
 
-[node name="Player" parent="." instance=ExtResource("6_w342s")]
+[node name="Player" parent="." node_paths=PackedStringArray("ui") instance=ExtResource("6_w342s")]
+ui = NodePath("../UI")
 
 [node name="BG" type="CanvasLayer" parent="."]
 layer = -100

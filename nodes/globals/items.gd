@@ -1,5 +1,6 @@
 class_name ItemsDB extends Resource
 
+const FUNC_MINE: String = "mine"
 const ITEMS := {
   "ferroaster": {
     "icon": "res://art/icons/ore_minerals/ferroaster.tres",
@@ -12,7 +13,7 @@ const ITEMS := {
   },
   "mining_cannon": {
     "icon": "res://art/icons/turrets/mining/mining_cannon.tres",
-    "function": "mine",
+    "function": FUNC_MINE,
     "slot": "high",
     "cycle": 60.0,
     "cpu": 60.0,
