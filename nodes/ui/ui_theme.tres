@@ -125,7 +125,7 @@ corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i7m42"]
-bg_color = Color(0.156863, 0.156863, 0.156863, 0.235294)
+bg_color = Color(0.156863, 0.156863, 0.156863, 0.960784)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -160,8 +160,7 @@ corner_radius_bottom_left = 2
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_hsfui"]
 color = Color(0.235294, 0.219608, 0.211765, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hnar2"]
-bg_color = Color(0.156863, 0.156863, 0.156863, 0.235294)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gkpmf"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qvfpp"]
 
@@ -247,7 +246,7 @@ TabContainer/colors/font_hovered_color = Color(0.694118, 0.384314, 0.52549, 1)
 TabContainer/colors/font_selected_color = Color(0.921569, 0.858824, 0.698039, 1)
 TabContainer/colors/font_unselected_color = Color(0.658824, 0.6, 0.517647, 1)
 TabContainer/fonts/font = ExtResource("2_gkwv6")
-TabContainer/styles/panel = SubResource("StyleBoxFlat_hnar2")
+TabContainer/styles/panel = SubResource("StyleBoxEmpty_gkpmf")
 TabContainer/styles/tab_focus = SubResource("StyleBoxEmpty_qvfpp")
 TabContainer/styles/tab_hovered = SubResource("StyleBoxFlat_aoaw0")
 TabContainer/styles/tab_selected = SubResource("StyleBoxFlat_v6rac")
