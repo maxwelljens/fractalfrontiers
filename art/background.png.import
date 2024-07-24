@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dji8262s7jcsv"
-path="res://.godot/imported/ff_icons_large.png-39bcee767c55d4475f5e20ea0fe1ab4c.ctex"
+uid="uid://dtsnaneu38tcb"
+path="res://.godot/imported/background.png-694afb2807fe739c9f0954541e14cf0b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/atlas/ff_icons_large.png"
-dest_files=["res://.godot/imported/ff_icons_large.png-39bcee767c55d4475f5e20ea0fe1ab4c.ctex"]
+source_file="res://art/background.png"
+dest_files=["res://.godot/imported/background.png-694afb2807fe739c9f0954541e14cf0b.ctex"]
 
 [params]
 

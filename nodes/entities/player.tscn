@@ -25,17 +25,6 @@ texture = SubResource("AtlasTexture_4ay1r")
 [node name="Rig" type="Node" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("3_4bv3y")
 player = NodePath("..")
-powergrid = 215.0
-processor = 350.0
-capacitor = 375.0
-low_slots = 5
-max_speed = 130
-inertia_mod = 0.78
-warp_speed = 4.5
-hitpoints = 2600
-mass = 11250000
-volume = 240000
-cargo_capacity = 2700
 
 [node name="InputControl" type="Node" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("3_yyr7e")
@@ -43,10 +32,6 @@ player = NodePath("..")
 
 [node name="Selector" type="Node2D" parent="."]
 script = ExtResource("5_2irkj")
-
-[node name="Line2D" type="Line2D" parent="."]
-width = 2.0
-default_color = Color(0.926083, 0, 0.19246, 1)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 process_callback = 0

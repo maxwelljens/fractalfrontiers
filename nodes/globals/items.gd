@@ -13,10 +13,6 @@ const ITEMS := {
   },
   "mining_cannon": {
     "icon": "res://art/icons/turrets/mining/mining_cannon.tres",
-    "function": FUNC_MINE,
-    "slot": "high",
-    "cycle": 60.0,
-    "cpu": 60.0,
-    "powergrid": 2.0,
+    "function": FUNC_MINE
   }
 }

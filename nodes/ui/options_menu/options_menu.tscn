@@ -1,0 +1,76 @@
+[gd_scene load_steps=5 format=3 uid="uid://dohd8y8fvjqcn"]
+
+[ext_resource type="Theme" uid="uid://cnudye4assl6f" path="res://nodes/ui/ui_theme.tres" id="1_4eiuw"]
+[ext_resource type="Script" path="res://nodes/ui/options_menu/options_menu.gd" id="2_bwvyo"]
+[ext_resource type="PackedScene" uid="uid://duk84yuq44hp3" path="res://nodes/ui/blur_rect.tscn" id="3_a67dj"]
+[ext_resource type="Script" path="res://nodes/ui/options_menu/graphics.gd" id="4_3usa7"]
+
+[node name="OptionsMenu" type="PanelContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -283.0
+offset_top = -271.0
+offset_right = 283.0
+offset_bottom = 272.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_4eiuw")
+script = ExtResource("2_bwvyo")
+
+[node name="BlurRect" parent="." instance=ExtResource("3_a67dj")]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 1
+
+[node name="Gameplay" type="VBoxContainer" parent="VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Graphics" type="ScrollContainer" parent="VBoxContainer/TabContainer"]
+layout_mode = 2
+script = ExtResource("4_3usa7")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/TabContainer/Graphics"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/TabContainer/Graphics/MarginContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="ScreenModeLabel" type="Label" parent="VBoxContainer/TabContainer/Graphics/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Screen Mode:"
+
+[node name="ScreenModeOB" type="OptionButton" parent="VBoxContainer/TabContainer/Graphics/MarginContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ResolutionLabel" type="Label" parent="VBoxContainer/TabContainer/Graphics/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Resolution:"
+
+[node name="ResolutionOB" type="OptionButton" parent="VBoxContainer/TabContainer/Graphics/MarginContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Audio" type="VBoxContainer" parent="VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="GoBackButton" type="Button" parent="VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Go Back"
