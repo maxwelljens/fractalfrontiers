@@ -66,6 +66,11 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_1mvp8"]
+color = Color(0.839216, 0.364706, 0.054902, 1)
+thickness = 2
+vertical = true
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i0fgt"]
 content_margin_left = 8.0
 content_margin_right = 8.0
@@ -141,8 +146,6 @@ expand_margin_top = 4.0
 expand_margin_right = 4.0
 expand_margin_bottom = 4.0
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4ijvf"]
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kj0gx"]
 bg_color = Color(0.156863, 0.156863, 0.156863, 1)
 corner_radius_top_left = 2
@@ -182,9 +185,9 @@ bg_color = Color(0, 0, 0, 0)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
-border_color = Color(0.156863, 0.156863, 0.156863, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
+border_color = Color(0.921569, 0.858824, 0.698039, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_di3lf"]
 content_margin_left = 8.0
@@ -202,7 +205,7 @@ vertical = true
 [resource]
 Button/colors/font_color = Color(0.921569, 0.858824, 0.698039, 1)
 Button/colors/font_disabled_color = Color(0.658824, 0.6, 0.517647, 1)
-Button/colors/font_focus_color = Color(0.741176, 0.682353, 0.576471, 1)
+Button/colors/font_focus_color = Color(0.996078, 0.501961, 0.0980392, 1)
 Button/colors/font_hover_color = Color(0.827451, 0.52549, 0.607843, 1)
 Button/colors/font_hover_pressed_color = Color(0.827451, 0.52549, 0.607843, 1)
 Button/colors/font_pressed_color = Color(0.921569, 0.858824, 0.698039, 1)
@@ -212,6 +215,7 @@ Button/styles/focus = SubResource("StyleBoxFlat_7v634")
 Button/styles/hover = SubResource("StyleBoxFlat_1boiw")
 Button/styles/normal = SubResource("StyleBoxFlat_3a36f")
 Button/styles/pressed = SubResource("StyleBoxFlat_6eets")
+CheckButton/styles/focus = SubResource("StyleBoxLine_1mvp8")
 Label/colors/font_color = Color(0.921569, 0.858824, 0.698039, 1)
 Label/fonts/font = ExtResource("1_0xkx8")
 MarginContainer/constants/margin_bottom = 8
@@ -224,7 +228,6 @@ OptionButton/styles/hover = SubResource("StyleBoxFlat_le7bu")
 OptionButton/styles/normal = SubResource("StyleBoxFlat_fwbaf")
 OptionButton/styles/pressed = SubResource("StyleBoxFlat_cugoe")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_i7m42")
-PopupDialog/styles/panel = SubResource("StyleBoxEmpty_4ijvf")
 PopupMenu/colors/font_color = Color(0.921569, 0.858824, 0.698039, 1)
 PopupMenu/colors/font_hover_color = Color(0.694118, 0.384314, 0.52549, 1)
 PopupMenu/fonts/font = ExtResource("1_0xkx8")

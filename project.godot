@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Fractal Frontiers"
-run/main_scene="res://nodes/levels/main_menu.tscn"
+run/main_scene="res://nodes/levels/ff_test.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
@@ -56,3 +60,7 @@ wheel_backward={
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":16,"position":Vector2(176.4, 24.4),"global_position":Vector2(180, 63),"factor":1.0,"button_index":5,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
 }
+
+[physics]
+
+2d/default_gravity=0.0

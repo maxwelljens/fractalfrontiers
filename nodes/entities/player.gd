@@ -1,6 +1,5 @@
 class_name Player extends CharacterBody2D
 
-@export var ui: UI
 @export var camera: Camera2D
 @export var rig: Rig
 @export var control: InputControl

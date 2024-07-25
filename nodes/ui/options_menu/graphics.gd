@@ -10,7 +10,7 @@ const SCREEN_MODES: Array[StringName] = [
 const RESOLUTIONS: Array[Vector2i] = [
   Vector2i(800, 600),
   Vector2i(1024, 600),
-  Vector2i(1152, 648),
+  Vector2i(1152, 648), # Godot Default
   Vector2i(1280, 720),
   Vector2i(1440, 900),
   Vector2i(1366, 768),
@@ -21,19 +21,16 @@ const RESOLUTIONS: Array[Vector2i] = [
 
 @onready var screen_mode_ob: OptionButton = %ScreenModeOB
 @onready var resolution_ob: OptionButton = %ResolutionOB
-@onready var scale_slider: HSlider = %ScaleSlider
-@onready var scale_percentage: Label = %ScalePercentage
-@onready var scale_apply_button: Button = %ScaleApplyButton
+@onready var vsync_cb: CheckButton = %VSyncCB
 
 func _ready() -> void:
   screen_mode_ob.item_selected.connect(_on_screen_mode_selected)
-  resolution_ob.item_selected.connect(_update_resolution_options)
-  scale_slider.value_changed.connect(_on_scale_slider_value_changed)
-  scale_apply_button.pressed.connect(_on_scale_apply_button_pressed)
+  resolution_ob.item_selected.connect(_on_resolution_ob_item_selected)
+  vsync_cb.toggled.connect(_on_vsync_cb_toggled)
   _populate_screen_mode_options()
   _update_screen_mode_selection()
   _populate_resolution_options()
-  _update_resolution_options()
+  _update_vsync_mode()
 
 func _process(_delta) -> void:
   pass
@@ -77,12 +74,20 @@ func _populate_resolution_options() -> void:
   for vec in RESOLUTIONS:
     var resolution_string := "%s x %s" % [vec.x, vec.y]
     resolution_ob.add_item(resolution_string)
+  resolution_ob.select(2)
 
-func _update_resolution_options() -> void:
-  var screen_size: Vector2i = DisplayServer.screen_get_size()
+func _on_resolution_ob_item_selected(index: int) -> void:
+  get_window().size = RESOLUTIONS[index]
 
-func _on_scale_slider_value_changed(_value: float) -> void:
-  scale_percentage.text = "%s%%" % [scale_slider.value * 100]
+func _on_vsync_cb_toggled(toggled_on: bool) -> void:
+  if toggled_on:
+    DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ADAPTIVE)
+    print(DisplayServer.window_get_vsync_mode())
+  else:
+    DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 
-func _on_scale_apply_button_pressed() -> void:
-  get_window().content_scale_factor = scale_slider.value
+func _update_vsync_mode() -> void:
+  if DisplayServer.window_get_vsync_mode() == DisplayServer.VSYNC_DISABLED:
+    vsync_cb.button_pressed = false
+  else:
+    vsync_cb.button_pressed = true

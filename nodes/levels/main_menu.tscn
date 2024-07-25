@@ -120,6 +120,10 @@ text = "Exit to OS"
 
 [node name="OptionsMenu" parent="UI" instance=ExtResource("5_c68ly")]
 unique_name_in_owner = true
+offset_left = -199.0
+offset_top = -192.0
+offset_right = 199.0
+offset_bottom = 193.0
 
 [node name="BG" type="CanvasLayer" parent="."]
 layer = -100
