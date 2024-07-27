@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://cop56vjof0q5y"]
 
-[ext_resource type="Texture2D" uid="uid://hbpsbp4tm3uq" path="res://art/point_light.png" id="3_4b6mf"]
+[ext_resource type="Texture2D" uid="uid://hbpsbp4tm3uq" path="res://art/light/point_light.png" id="3_4b6mf"]
 [ext_resource type="PackedScene" uid="uid://bap2gxbilpq0k" path="res://nodes/entities/asteroid.tscn" id="5_r1ia8"]
 [ext_resource type="PackedScene" uid="uid://mfqv438mljqk" path="res://nodes/entities/player.tscn" id="6_w342s"]
 

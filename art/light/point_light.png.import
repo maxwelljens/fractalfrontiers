@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqi02gbwkcw1e"
-path="res://.godot/imported/ship.png-b56ecc5483cd6d4377dd8f991e09512c.ctex"
+uid="uid://hbpsbp4tm3uq"
+path="res://.godot/imported/point_light.png-a5c4f3a9ea082e00051885a2b1ece874.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/ship.png"
-dest_files=["res://.godot/imported/ship.png-b56ecc5483cd6d4377dd8f991e09512c.ctex"]
+source_file="res://art/light/point_light.png"
+dest_files=["res://.godot/imported/point_light.png-a5c4f3a9ea082e00051885a2b1ece874.ctex"]
 
 [params]
 

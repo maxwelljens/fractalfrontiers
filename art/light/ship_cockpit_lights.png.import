@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://s4to67ffk84f"
-path="res://.godot/imported/ships.png-8b630fdbe3a7114be4ad8d491509a11d.ctex"
+uid="uid://cbytf1yl8gn2x"
+path="res://.godot/imported/ship_cockpit_lights.png-7c7a905869d46dba413f910a304a95be.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/ships.png"
-dest_files=["res://.godot/imported/ships.png-8b630fdbe3a7114be4ad8d491509a11d.ctex"]
+source_file="res://art/light/ship_cockpit_lights.png"
+dest_files=["res://.godot/imported/ship_cockpit_lights.png-7c7a905869d46dba413f910a304a95be.ctex"]
 
 [params]
 
