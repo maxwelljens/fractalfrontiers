@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://mfqv438mljqk"]
+[gd_scene load_steps=21 format=3 uid="uid://mfqv438mljqk"]
 
 [ext_resource type="Script" path="res://nodes/entities/player.gd" id="1_36kp7"]
 [ext_resource type="Material" uid="uid://b7n4qkux5vhur" path="res://art/particles/rear_thruster.tres" id="2_0vb0s"]
@@ -13,13 +13,21 @@
 [ext_resource type="Texture2D" uid="uid://hbpsbp4tm3uq" path="res://art/point_light.png" id="8_aydwh"]
 [ext_resource type="Texture2D" uid="uid://bqi02gbwkcw1e" path="res://art/ship.png" id="8_ot2ku"]
 [ext_resource type="Texture2D" uid="uid://dqj8o4x7if1hy" path="res://art/position_light.png" id="9_njeqt"]
+[ext_resource type="Texture2D" uid="uid://cbytf1yl8gn2x" path="res://art/ship_cockpit_lights.png" id="9_surij"]
+[ext_resource type="Texture2D" uid="uid://7ot344imhrvq" path="res://art/ship_normal.png" id="11_madyl"]
 [ext_resource type="Script" path="res://nodes/camera.gd" id="11_sj1bj"]
+[ext_resource type="Texture2D" uid="uid://bxkgltw0rpb85" path="res://art/spotlight.png" id="16_8vklm"]
+[ext_resource type="Script" path="res://nodes/spotlight.gd" id="17_ev8ld"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_aaeek"]
 particles_animation = true
 particles_anim_h_frames = 8
 particles_anim_v_frames = 1
 particles_anim_loop = false
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_87nvk"]
+diffuse_texture = ExtResource("8_ot2ku")
+normal_texture = ExtResource("11_madyl")
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("camera", "rig", "control", "selector")]
 texture_filter = 4
@@ -36,6 +44,7 @@ input_control = NodePath("../InputControl")
 [node name="Emitters" type="Node2D" parent="PlayerGFX"]
 
 [node name="RearThruster" type="GPUParticles2D" parent="PlayerGFX/Emitters"]
+light_mask = 2
 material = SubResource("CanvasItemMaterial_aaeek")
 position = Vector2(-178, 0)
 emitting = false
@@ -44,6 +53,7 @@ process_material = ExtResource("2_0vb0s")
 texture = ExtResource("2_8u5a1")
 
 [node name="FrontThrusterR" type="GPUParticles2D" parent="PlayerGFX/Emitters"]
+light_mask = 2
 material = SubResource("CanvasItemMaterial_aaeek")
 position = Vector2(186, 31)
 emitting = false
@@ -51,6 +61,7 @@ process_material = ExtResource("4_04b32")
 texture = ExtResource("2_8u5a1")
 
 [node name="FrontThrusterL" type="GPUParticles2D" parent="PlayerGFX/Emitters"]
+light_mask = 2
 material = SubResource("CanvasItemMaterial_aaeek")
 position = Vector2(185, -30)
 emitting = false
@@ -58,6 +69,7 @@ process_material = ExtResource("4_04b32")
 texture = ExtResource("2_8u5a1")
 
 [node name="LeftThrusterF" type="GPUParticles2D" parent="PlayerGFX/Emitters"]
+light_mask = 2
 material = SubResource("CanvasItemMaterial_aaeek")
 position = Vector2(57, -90)
 emitting = false
@@ -65,6 +77,7 @@ process_material = ExtResource("5_i7xd3")
 texture = ExtResource("2_8u5a1")
 
 [node name="LeftThrusterR" type="GPUParticles2D" parent="PlayerGFX/Emitters"]
+light_mask = 2
 material = SubResource("CanvasItemMaterial_aaeek")
 position = Vector2(-81, -90)
 emitting = false
@@ -72,6 +85,7 @@ process_material = ExtResource("5_i7xd3")
 texture = ExtResource("2_8u5a1")
 
 [node name="RightThrusterF" type="GPUParticles2D" parent="PlayerGFX/Emitters"]
+light_mask = 2
 material = SubResource("CanvasItemMaterial_aaeek")
 position = Vector2(58, 91)
 emitting = false
@@ -79,6 +93,7 @@ process_material = ExtResource("6_egin3")
 texture = ExtResource("2_8u5a1")
 
 [node name="RightThrusterR" type="GPUParticles2D" parent="PlayerGFX/Emitters"]
+light_mask = 2
 material = SubResource("CanvasItemMaterial_aaeek")
 position = Vector2(-81, 91)
 emitting = false
@@ -91,13 +106,28 @@ texture = ExtResource("2_8u5a1")
 position = Vector2(-160, 0)
 scale = Vector2(0.150413, 0.150413)
 color = Color(0.876985, 0, 0.0351807, 1)
+range_item_cull_mask = 3
 texture = ExtResource("8_aydwh")
+texture_scale = 3.0
+height = 5.0
+
+[node name="CockpitLight" type="PointLight2D" parent="PlayerGFX/Lights"]
+position = Vector2(-26, 0)
+rotation = -4.71238
+scale = Vector2(0.150413, 0.150413)
+color = Color(1, 0.838198, 0.471829, 1)
+energy = 3.0
+range_item_cull_mask = 3
+texture = ExtResource("9_surij")
+texture_scale = 3.0
+height = 5.0
 
 [node name="PosLightRearL" type="PointLight2D" parent="PlayerGFX/Lights"]
 position = Vector2(-177, -33)
 rotation = 3.14159
 scale = Vector2(0.150413, 0.150413)
 energy = 3.0
+range_item_cull_mask = 3
 texture = ExtResource("9_njeqt")
 
 [node name="PosLightRearR" type="PointLight2D" parent="PlayerGFX/Lights"]
@@ -105,6 +135,7 @@ position = Vector2(-177, 33)
 rotation = 3.14159
 scale = Vector2(0.150413, 0.150413)
 energy = 3.0
+range_item_cull_mask = 3
 texture = ExtResource("9_njeqt")
 
 [node name="PosLightRight" type="PointLight2D" parent="PlayerGFX/Lights"]
@@ -112,6 +143,16 @@ position = Vector2(86, 96)
 rotation = 1.57079
 scale = Vector2(0.150413, 0.150413)
 energy = 3.0
+range_item_cull_mask = 3
+texture = ExtResource("9_njeqt")
+
+[node name="GreenLight" type="PointLight2D" parent="PlayerGFX/Lights"]
+position = Vector2(-102, 96)
+rotation = 1.57079
+scale = Vector2(0.150413, 0.150413)
+color = Color(0.189162, 0.680886, 0, 1)
+energy = 3.0
+range_item_cull_mask = 3
 texture = ExtResource("9_njeqt")
 
 [node name="PosLightLeft" type="PointLight2D" parent="PlayerGFX/Lights"]
@@ -119,6 +160,16 @@ position = Vector2(86, -96)
 rotation = 4.71238
 scale = Vector2(0.150413, 0.150413)
 energy = 3.0
+range_item_cull_mask = 3
+texture = ExtResource("9_njeqt")
+
+[node name="RedLight" type="PointLight2D" parent="PlayerGFX/Lights"]
+position = Vector2(-100, -96)
+rotation = 4.71238
+scale = Vector2(0.150413, 0.150413)
+color = Color(1, 0.119143, 0.136171, 1)
+energy = 3.0
+range_item_cull_mask = 3
 texture = ExtResource("9_njeqt")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
@@ -126,15 +177,33 @@ rotation = -1.57079
 polygon = PackedVector2Array(90.9992, -123.001, 90.9997, -51.0006, 76.9997, -48.0005, 77.0002, 29.9995, 90.0002, 34.9994, 90.0007, 104.999, 62.0007, 111, 41.0012, 186, 21.0012, 186, 12.001, 163, -12.999, 163, -21.9988, 186, -40.9988, 186, -60.9993, 111, -90.9993, 104.001, -90.9998, 37.0006, -75.9998, 29.0005, -76.0003, -47.9995, -91.0003, -51.9994, -91.0008, -121.999, -57.0008, -126, -41.0011, -175, 40.9989, -175, 57.9992, -127)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 2
 rotation = 1.5708
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("8_ot2ku")
+texture = SubResource("CanvasTexture_87nvk")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
 process_callback = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 script = ExtResource("11_sj1bj")
+player = NodePath("..")
+deadzone = 200.0
+
+[node name="Spotlight" type="PointLight2D" parent="."]
+position = Vector2(143, 0)
+scale = Vector2(2.04, 0.880001)
+energy = 3.0
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 4.0
+texture = ExtResource("16_8vklm")
+offset = Vector2(184, 0)
+texture_scale = 2.8
+script = ExtResource("17_ev8ld")
+
+[node name="Selector" type="Node2D" parent="."]
+script = ExtResource("5_2irkj")
 
 [node name="Rig" type="Node" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("3_4bv3y")
@@ -146,6 +215,3 @@ player = NodePath("..")
 thrust_strength = 0.05
 drag = 0.01
 rotation_drag = 0.2
-
-[node name="Selector" type="Node2D" parent="."]
-script = ExtResource("5_2irkj")

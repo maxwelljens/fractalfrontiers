@@ -1,5 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://cop56vjof0q5y"]
+[gd_scene load_steps=17 format=3 uid="uid://cop56vjof0q5y"]
 
+[ext_resource type="Texture2D" uid="uid://hbpsbp4tm3uq" path="res://art/point_light.png" id="3_4b6mf"]
 [ext_resource type="PackedScene" uid="uid://bap2gxbilpq0k" path="res://nodes/entities/asteroid.tscn" id="5_r1ia8"]
 [ext_resource type="PackedScene" uid="uid://mfqv438mljqk" path="res://nodes/entities/player.tscn" id="6_w342s"]
 
@@ -78,7 +79,14 @@ noise = SubResource("FastNoiseLite_gawcj")
 [node name="FFTest" type="Node2D"]
 
 [node name="Darkness" type="CanvasModulate" parent="."]
-color = Color(0.124512, 0.124512, 0.124512, 1)
+color = Color(0.0955445, 0.0955445, 0.0955444, 1)
+
+[node name="Sunlight" type="DirectionalLight2D" parent="."]
+rotation = 2.70582
+energy = 3.0
+shadow_enabled = true
+shadow_filter = 1
+height = 0.1
 
 [node name="Asteroid" parent="." instance=ExtResource("5_r1ia8")]
 position = Vector2(162, 2)
@@ -87,9 +95,19 @@ position = Vector2(162, 2)
 color = Color(0.0354509, 0.0354509, 0.0354509, 1)
 polygon = PackedVector2Array(-803, 68, 492, 73, 494, -508, -814, -501)
 
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-417, -241)
+color = Color(1, 0.732352, 0.675705, 1)
+energy = 4.0
+range_item_cull_mask = 3
+shadow_enabled = true
+texture = ExtResource("3_4b6mf")
+texture_scale = 5.2
+height = 5.0
+
 [node name="Player" parent="." instance=ExtResource("6_w342s")]
-position = Vector2(-344, -150)
-rotation = -0.590869
+position = Vector2(-427, -121)
+rotation = -0.314378
 scale = Vector2(0.5, 0.5)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
@@ -103,13 +121,6 @@ polygon = PackedVector2Array(-98, -64, -35, -124, -14, -224, -86, -308, -67, -38
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="StaticBody2D"]
 occluder = SubResource("OccluderPolygon2D_u30q6")
-
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-position = Vector2(556, 43)
-rotation = 2.70582
-shadow_enabled = true
-shadow_filter = 1
-shadow_filter_smooth = 2.0
 
 [node name="BG" type="CanvasLayer" parent="."]
 layer = -100
