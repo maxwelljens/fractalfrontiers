@@ -1,7 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://cop56vjof0q5y"]
+[gd_scene load_steps=16 format=3 uid="uid://cop56vjof0q5y"]
 
 [ext_resource type="PackedScene" uid="uid://bap2gxbilpq0k" path="res://nodes/entities/asteroid.tscn" id="5_r1ia8"]
 [ext_resource type="PackedScene" uid="uid://mfqv438mljqk" path="res://nodes/entities/player.tscn" id="6_w342s"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_u30q6"]
+closed = false
+polygon = PackedVector2Array(-358, 106, -281, 130, -267, 60, -196, -1, -133, 3, -34, -132, -16, -229, -88, -307, -69, -385, -26, -408, 51, -384, 116, -201, 377, -70, 507, -168, 516, -569, -808, -571, -787, -264, -589, -201, -372, -256, -380, -415, -309, -458, -243, -340, -183, -292, -192, -183, -270, -57, -368, 34)
 
 [sub_resource type="Gradient" id="Gradient_lcjlj"]
 colors = PackedColorArray(0.0142752, 0.0142752, 0.0142752, 1, 0, 0, 0, 1)
@@ -73,10 +77,39 @@ noise = SubResource("FastNoiseLite_gawcj")
 
 [node name="FFTest" type="Node2D"]
 
+[node name="Darkness" type="CanvasModulate" parent="."]
+color = Color(0.124512, 0.124512, 0.124512, 1)
+
 [node name="Asteroid" parent="." instance=ExtResource("5_r1ia8")]
 position = Vector2(162, 2)
 
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.0354509, 0.0354509, 0.0354509, 1)
+polygon = PackedVector2Array(-803, 68, 492, 73, 494, -508, -814, -501)
+
 [node name="Player" parent="." instance=ExtResource("6_w342s")]
+position = Vector2(-344, -150)
+rotation = -0.590869
+scale = Vector2(0.5, 0.5)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-130, 4, -98, -66, -33, -125, -16, -224, -84, -304, -67, -384, -28, -408, 50, -385, 99, -293, 116, -198, 377, -75, 507, -169, 389, -218, 364, -266, 461, -273, 514, -452, 505, -566, -808, -568, -788, -272, -573, -200, -383, -254, -379, -405, -305, -460, -248, -343, -183, -296, -196, -186, -277, -55, -369, 42, -361, 100, -280, 128, -267, 59, -189, -8)
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D"]
+color = Color(0.120434, 0.120434, 0.120434, 1)
+polygon = PackedVector2Array(-98, -64, -35, -124, -14, -224, -86, -308, -67, -382, -26, -407, 46, -386, 96, -296, 120, -195, 240, -132, 376, -71, 504, -167, 387, -219, 364, -263, 464, -274, 509, -346, 515, -569, -812, -571, -786, -264, -583, -195, -372, -256, -380, -409, -308, -457, -249, -345, -180, -291, -198, -179, -270, -64, -369, 35, -358, 109, -276, 131, -268, 64, -201, 3, -132, 5)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="StaticBody2D"]
+occluder = SubResource("OccluderPolygon2D_u30q6")
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+position = Vector2(556, 43)
+rotation = 2.70582
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 2.0
 
 [node name="BG" type="CanvasLayer" parent="."]
 layer = -100
@@ -119,12 +152,3 @@ offset_right = 3257.0
 offset_bottom = 1182.0
 texture = SubResource("NoiseTexture2D_rlbu5")
 stretch_mode = 1
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-polygon = PackedVector2Array(-130, 4, -98, -66, -33, -125, -16, -224, -84, -304, -67, -384, -28, -408, 50, -385, 99, -293, 116, -198, 377, -75, 507, -169, 389, -218, 364, -266, 461, -273, 514, -452, 505, -566, -808, -568, -788, -272, -573, -200, -383, -254, -379, -405, -305, -460, -248, -343, -183, -296, -196, -186, -277, -55, -369, 42, -361, 100, -280, 128, -267, 59, -189, -8)
-
-[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D"]
-color = Color(0.120434, 0.120434, 0.120434, 1)
-polygon = PackedVector2Array(-98, -64, -35, -124, -14, -224, -86, -308, -67, -382, -26, -407, 46, -386, 96, -296, 120, -195, 240, -132, 376, -71, 504, -167, 387, -219, 364, -263, 464, -274, 509, -346, 515, -569, -812, -571, -786, -264, -583, -195, -372, -256, -380, -409, -308, -457, -249, -345, -180, -291, -198, -179, -270, -64, -369, 35, -358, 109, -276, 131, -268, 64, -201, 3, -132, 5)

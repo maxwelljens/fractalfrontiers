@@ -1,24 +1,19 @@
-[gd_scene load_steps=15 format=3 uid="uid://mfqv438mljqk"]
+[gd_scene load_steps=16 format=3 uid="uid://mfqv438mljqk"]
 
 [ext_resource type="Script" path="res://nodes/entities/player.gd" id="1_36kp7"]
 [ext_resource type="Material" uid="uid://b7n4qkux5vhur" path="res://art/particles/rear_thruster.tres" id="2_0vb0s"]
 [ext_resource type="Texture2D" uid="uid://bqlytuu7wce12" path="res://art/smoke.png" id="2_8u5a1"]
 [ext_resource type="Script" path="res://nodes/entities/player_gfx.gd" id="2_13ux2"]
-[ext_resource type="Texture2D" uid="uid://s4to67ffk84f" path="res://art/ships.png" id="2_xem4q"]
 [ext_resource type="Script" path="res://nodes/rig.gd" id="3_4bv3y"]
 [ext_resource type="Script" path="res://nodes/control_input.gd" id="3_yyr7e"]
 [ext_resource type="Material" uid="uid://brt0y8nov3m3p" path="res://art/particles/front_thruster.tres" id="4_04b32"]
 [ext_resource type="Script" path="res://nodes/selector.gd" id="5_2irkj"]
 [ext_resource type="Material" uid="uid://cj5njdm4nnfgt" path="res://art/particles/left_thruster.tres" id="5_i7xd3"]
 [ext_resource type="Material" uid="uid://bec50nfrdryjn" path="res://art/particles/right_thruster.tres" id="6_egin3"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2y04v"]
-radius = 8.0
-height = 60.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4ay1r"]
-atlas = ExtResource("2_xem4q")
-region = Rect2(160, 64, 22, 60)
+[ext_resource type="Texture2D" uid="uid://hbpsbp4tm3uq" path="res://art/point_light.png" id="8_aydwh"]
+[ext_resource type="Texture2D" uid="uid://bqi02gbwkcw1e" path="res://art/ship.png" id="8_ot2ku"]
+[ext_resource type="Texture2D" uid="uid://dqj8o4x7if1hy" path="res://art/position_light.png" id="9_njeqt"]
+[ext_resource type="Script" path="res://nodes/camera.gd" id="11_sj1bj"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_aaeek"]
 particles_animation = true
@@ -27,78 +22,119 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("camera", "rig", "control", "selector")]
+texture_filter = 4
 script = ExtResource("1_36kp7")
 camera = NodePath("Camera2D")
 rig = NodePath("Rig")
 control = NodePath("InputControl")
 selector = NodePath("Selector")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="PlayerGFX" type="Node2D" parent="." node_paths=PackedStringArray("input_control")]
+script = ExtResource("2_13ux2")
+input_control = NodePath("../InputControl")
+
+[node name="Emitters" type="Node2D" parent="PlayerGFX"]
+
+[node name="RearThruster" type="GPUParticles2D" parent="PlayerGFX/Emitters"]
+material = SubResource("CanvasItemMaterial_aaeek")
+position = Vector2(-178, 0)
+emitting = false
+amount = 14
+process_material = ExtResource("2_0vb0s")
+texture = ExtResource("2_8u5a1")
+
+[node name="FrontThrusterR" type="GPUParticles2D" parent="PlayerGFX/Emitters"]
+material = SubResource("CanvasItemMaterial_aaeek")
+position = Vector2(186, 31)
+emitting = false
+process_material = ExtResource("4_04b32")
+texture = ExtResource("2_8u5a1")
+
+[node name="FrontThrusterL" type="GPUParticles2D" parent="PlayerGFX/Emitters"]
+material = SubResource("CanvasItemMaterial_aaeek")
+position = Vector2(185, -30)
+emitting = false
+process_material = ExtResource("4_04b32")
+texture = ExtResource("2_8u5a1")
+
+[node name="LeftThrusterF" type="GPUParticles2D" parent="PlayerGFX/Emitters"]
+material = SubResource("CanvasItemMaterial_aaeek")
+position = Vector2(57, -90)
+emitting = false
+process_material = ExtResource("5_i7xd3")
+texture = ExtResource("2_8u5a1")
+
+[node name="LeftThrusterR" type="GPUParticles2D" parent="PlayerGFX/Emitters"]
+material = SubResource("CanvasItemMaterial_aaeek")
+position = Vector2(-81, -90)
+emitting = false
+process_material = ExtResource("5_i7xd3")
+texture = ExtResource("2_8u5a1")
+
+[node name="RightThrusterF" type="GPUParticles2D" parent="PlayerGFX/Emitters"]
+material = SubResource("CanvasItemMaterial_aaeek")
+position = Vector2(58, 91)
+emitting = false
+process_material = ExtResource("6_egin3")
+texture = ExtResource("2_8u5a1")
+
+[node name="RightThrusterR" type="GPUParticles2D" parent="PlayerGFX/Emitters"]
+material = SubResource("CanvasItemMaterial_aaeek")
+position = Vector2(-81, 91)
+emitting = false
+process_material = ExtResource("6_egin3")
+texture = ExtResource("2_8u5a1")
+
+[node name="Lights" type="Node2D" parent="PlayerGFX"]
+
+[node name="EngineLight" type="PointLight2D" parent="PlayerGFX/Lights"]
+position = Vector2(-160, 0)
+scale = Vector2(0.150413, 0.150413)
+color = Color(0.876985, 0, 0.0351807, 1)
+texture = ExtResource("8_aydwh")
+
+[node name="PosLightRearL" type="PointLight2D" parent="PlayerGFX/Lights"]
+position = Vector2(-177, -33)
+rotation = 3.14159
+scale = Vector2(0.150413, 0.150413)
+energy = 3.0
+texture = ExtResource("9_njeqt")
+
+[node name="PosLightRearR" type="PointLight2D" parent="PlayerGFX/Lights"]
+position = Vector2(-177, 33)
+rotation = 3.14159
+scale = Vector2(0.150413, 0.150413)
+energy = 3.0
+texture = ExtResource("9_njeqt")
+
+[node name="PosLightRight" type="PointLight2D" parent="PlayerGFX/Lights"]
+position = Vector2(86, 96)
+rotation = 1.57079
+scale = Vector2(0.150413, 0.150413)
+energy = 3.0
+texture = ExtResource("9_njeqt")
+
+[node name="PosLightLeft" type="PointLight2D" parent="PlayerGFX/Lights"]
+position = Vector2(86, -96)
+rotation = 4.71238
+scale = Vector2(0.150413, 0.150413)
+energy = 3.0
+texture = ExtResource("9_njeqt")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 rotation = -1.57079
-shape = SubResource("CapsuleShape2D_2y04v")
+polygon = PackedVector2Array(90.9992, -123.001, 90.9997, -51.0006, 76.9997, -48.0005, 77.0002, 29.9995, 90.0002, 34.9994, 90.0007, 104.999, 62.0007, 111, 41.0012, 186, 21.0012, 186, 12.001, 163, -12.999, 163, -21.9988, 186, -40.9988, 186, -60.9993, 111, -90.9993, 104.001, -90.9998, 37.0006, -75.9998, 29.0005, -76.0003, -47.9995, -91.0003, -51.9994, -91.0008, -121.999, -57.0008, -126, -41.0011, -175, 40.9989, -175, 57.9992, -127)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture_filter = 3
 rotation = 1.5708
-texture = SubResource("AtlasTexture_4ay1r")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_ot2ku")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 process_callback = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
-
-[node name="PlayerGFX" type="Node2D" parent="." node_paths=PackedStringArray("input_control")]
-script = ExtResource("2_13ux2")
-input_control = NodePath("../InputControl")
-
-[node name="RearThruster" type="GPUParticles2D" parent="PlayerGFX"]
-material = SubResource("CanvasItemMaterial_aaeek")
-position = Vector2(-30, 0)
-emitting = false
-process_material = ExtResource("2_0vb0s")
-texture = ExtResource("2_8u5a1")
-
-[node name="FrontThrusterR" type="GPUParticles2D" parent="PlayerGFX"]
-material = SubResource("CanvasItemMaterial_aaeek")
-position = Vector2(22, 6)
-emitting = false
-process_material = ExtResource("4_04b32")
-texture = ExtResource("2_8u5a1")
-
-[node name="FrontThrusterL" type="GPUParticles2D" parent="PlayerGFX"]
-material = SubResource("CanvasItemMaterial_aaeek")
-position = Vector2(22, -6)
-emitting = false
-process_material = ExtResource("4_04b32")
-texture = ExtResource("2_8u5a1")
-
-[node name="LeftThrusterF" type="GPUParticles2D" parent="PlayerGFX"]
-material = SubResource("CanvasItemMaterial_aaeek")
-position = Vector2(17, -8)
-emitting = false
-process_material = ExtResource("5_i7xd3")
-texture = ExtResource("2_8u5a1")
-
-[node name="LeftThrusterR" type="GPUParticles2D" parent="PlayerGFX"]
-material = SubResource("CanvasItemMaterial_aaeek")
-position = Vector2(-16, -10)
-emitting = false
-process_material = ExtResource("5_i7xd3")
-texture = ExtResource("2_8u5a1")
-
-[node name="RightThrusterF" type="GPUParticles2D" parent="PlayerGFX"]
-material = SubResource("CanvasItemMaterial_aaeek")
-position = Vector2(17, 8)
-emitting = false
-process_material = ExtResource("6_egin3")
-texture = ExtResource("2_8u5a1")
-
-[node name="RightThrusterR" type="GPUParticles2D" parent="PlayerGFX"]
-material = SubResource("CanvasItemMaterial_aaeek")
-position = Vector2(-16, 10)
-emitting = false
-process_material = ExtResource("6_egin3")
-texture = ExtResource("2_8u5a1")
+script = ExtResource("11_sj1bj")
 
 [node name="Rig" type="Node" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("3_4bv3y")
@@ -107,8 +143,9 @@ player = NodePath("..")
 [node name="InputControl" type="Node" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("3_yyr7e")
 player = NodePath("..")
-thrust_strength = 0.3
-drag = 0.06
+thrust_strength = 0.05
+drag = 0.01
+rotation_drag = 0.2
 
 [node name="Selector" type="Node2D" parent="."]
 script = ExtResource("5_2irkj")

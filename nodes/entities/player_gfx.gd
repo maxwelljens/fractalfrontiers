@@ -2,13 +2,14 @@ class_name PlayerGFX extends Node2D
 
 @export var input_control: InputControl
 
-@onready var rear_thruster: GPUParticles2D = $RearThruster
-@onready var front_thruster_r: GPUParticles2D = $FrontThrusterR
-@onready var front_thruster_l: GPUParticles2D = $FrontThrusterL
-@onready var left_thruster_f: GPUParticles2D = $LeftThrusterF
-@onready var left_thruster_r: GPUParticles2D = $LeftThrusterR
-@onready var right_thruster_f: GPUParticles2D = $RightThrusterF
-@onready var right_thruster_r: GPUParticles2D = $RightThrusterR
+@onready var rear_thruster: GPUParticles2D = $Emitters/RearThruster
+@onready var front_thruster_r: GPUParticles2D = $Emitters/FrontThrusterR
+@onready var front_thruster_l: GPUParticles2D = $Emitters/FrontThrusterL
+@onready var left_thruster_f: GPUParticles2D = $Emitters/LeftThrusterF
+@onready var left_thruster_r: GPUParticles2D = $Emitters/LeftThrusterR
+@onready var right_thruster_f: GPUParticles2D = $Emitters/RightThrusterF
+@onready var right_thruster_r: GPUParticles2D = $Emitters/RightThrusterR
+@onready var warning_light: PointLight2D = $Lights/EngineLight
 
 func _ready() -> void:
   input_control.thrust_forward_started.connect(_on_input_control_thrust_forward_started)
@@ -19,6 +20,16 @@ func _ready() -> void:
   input_control.rotate_right_ended.connect(_on_input_control_rotate_right_ended)
   input_control.rotate_left_started.connect(_on_input_control_rotate_left_started)
   input_control.rotate_left_ended.connect(_on_input_control_rotate_left_ended)
+  _blink_engine_light()
+
+func _blink_engine_light() -> void:
+  const INTENSITY := 3.0
+  while true:
+    warning_light.energy = INTENSITY
+    await get_tree().create_timer(2.0).timeout
+    warning_light.energy = 0.0
+    await get_tree().create_timer(0.1).timeout
+    warning_light.energy = INTENSITY
 
 func _on_input_control_thrust_backward_started() -> void:
   front_thruster_l.emitting = true

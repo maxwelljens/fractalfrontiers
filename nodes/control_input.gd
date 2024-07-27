@@ -10,19 +10,26 @@ signal rotate_right_ended
 signal rotate_left_started
 signal rotate_left_ended
 
-const NORM_FACTOR := 10000
+const NORM_FACTOR := 100_000
 
 @export_category("Resources")
 @export var player: Player
 
 @export_category("Settings")
-@export_range(0.1, 2.0, 0.02) var thrust_strength: float = 0.5
-@export_range(0.01, 0.25, 0.01) var drag: float = 0.08
-@export_range(20, 100, 2) var rotation_strength: float = 50
-@export_range(0.01, 0.2, 0.01) var rotation_drag: float = 0.12
+@export var thrust_strength: float = 0.5
+@export var drag: float = 0.08
+@export var rotation_strength: float = 50
+@export var rotation_drag: float = 0.12
 
 var inertia := Vector2(0.0, 0.0)
 var rotation_inertia := 0.0
+
+func _ready() -> void:
+  player.collided.connect(_on_player_collided)
+
+func _on_player_collided() -> void:
+  inertia = Vector2.ZERO
+  rotation_inertia = 0.0
 
 func _process(delta: float) -> void:
   
@@ -63,7 +70,6 @@ func _process(delta: float) -> void:
   rotation_inertia = move_toward(rotation_inertia, 0.0, (rotation_drag / NORM_FACTOR))
   player.velocity = inertia
   player.rotation += move_toward(rotation_inertia, 0.0, (rotation_drag / NORM_FACTOR))
-  print(inertia)
 
 func _thrust_forward() -> void:
   inertia += Vector2.RIGHT.rotated(player.rotation) * thrust_strength

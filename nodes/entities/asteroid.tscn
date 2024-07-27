@@ -1,6 +1,5 @@
-[gd_scene load_steps=5 format=3 uid="uid://bap2gxbilpq0k"]
+[gd_scene load_steps=4 format=3 uid="uid://bap2gxbilpq0k"]
 
-[ext_resource type="Texture2D" uid="uid://b4u5riw8kcnyr" path="res://art/asteroid/asteroid1.png" id="1_rjulx"]
 [ext_resource type="Script" path="res://nodes/mineable.gd" id="2_n5307"]
 [ext_resource type="PackedScene" uid="uid://cy1vevbr2wdfw" path="res://nodes/selectable.tscn" id="3_41l7m"]
 
@@ -10,7 +9,6 @@ radius = 33.1913
 [node name="Asteroid" type="Area2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_rjulx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1.5, -0.5)
