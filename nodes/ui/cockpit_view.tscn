@@ -25,8 +25,9 @@ albedo_color = Color(0.547076, 0.16223, 0.0971512, 1)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_2cb75"]
 
-[node name="CockpitView" type="CanvasLayer"]
+[node name="CockpitView" type="CanvasLayer" node_paths=PackedStringArray("stick")]
 script = ExtResource("1_7de7h")
+stick = NodePath("SubViewportContainer/SubViewport/Path3D/PathFollow3D")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.99999, -0.00441446, 0.000618359, 0.00438246, 0.998993, 0.0446415, -0.000814805, -0.0446383, 0.999003, -0.0385094, -0.000627398, 2.13437)
@@ -51,7 +52,6 @@ transform = Transform3D(0.99999, -0.00441446, 0.000618359, 0.00438246, 0.998993,
 remote_path = NodePath("../../../Camera3D")
 
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/RemoteTransform3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="defaultcube" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_2cb75")]
 transform = Transform3D(0.311739, 0.0835301, -0.558994, -0.16706, 0.623477, 7.33907e-10, 0.539947, 0.144678, 0.322735, -1.80481, -1.5865, 0)
