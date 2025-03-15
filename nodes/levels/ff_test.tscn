@@ -100,6 +100,7 @@ rotation = 2.70582
 energy = 3.0
 shadow_enabled = true
 shadow_filter = 1
+shadow_filter_smooth = 2.0
 height = 0.1
 
 [node name="Asteroid" parent="." instance=ExtResource("5_r1ia8")]
@@ -110,7 +111,6 @@ color = Color(0.0354509, 0.0354509, 0.0354509, 1)
 polygon = PackedVector2Array(-803, 68, 492, 73, 494, -508, -814, -501)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-visible = false
 position = Vector2(-417, -241)
 color = Color(1, 0.732352, 0.675705, 1)
 energy = 4.0
