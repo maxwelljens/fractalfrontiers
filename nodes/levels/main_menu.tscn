@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://de6gkr1np4bl5"]
 
-[ext_resource type="Script" path="res://nodes/ui/main_menu_ui.gd" id="1_83o3p"]
+[ext_resource type="Script" uid="uid://c66tkocuhtfqh" path="res://nodes/ui/main_menu_ui.gd" id="1_83o3p"]
 [ext_resource type="FontFile" uid="uid://djaa80v3gxecc" path="res://font/droid.otf" id="2_ohbgo"]
 [ext_resource type="Theme" uid="uid://cnudye4assl6f" path="res://nodes/ui/ui_theme.tres" id="3_76nc0"]
 [ext_resource type="PackedScene" uid="uid://dohd8y8fvjqcn" path="res://nodes/ui/options_menu/options_menu.tscn" id="5_c68ly"]

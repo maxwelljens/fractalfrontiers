@@ -7,6 +7,7 @@ signal collided
 @export var control: InputControl
 @export var selector: Selector
 var speed: float
+var pressed: bool = false
 
 func _ready():
   camera.make_current()

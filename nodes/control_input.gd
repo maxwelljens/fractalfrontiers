@@ -7,8 +7,12 @@ signal thrust_backward_started
 signal thrust_backward_ended
 signal rotate_right_started
 signal rotate_right_ended
+signal strafe_right_started
+signal strafe_right_ended
 signal rotate_left_started
 signal rotate_left_ended
+signal strafe_left_started
+signal strafe_left_ended
 
 const NORM_FACTOR := 100_000
 
@@ -56,6 +60,14 @@ func _process(delta: float) -> void:
     emit_signal("rotate_right_started")
   if Input.is_action_just_released("right"):
     emit_signal("rotate_right_ended")
+
+  # Strafe right
+  if Input.is_action_pressed("strafe_right"):
+    _strafe_right()
+  if Input.is_action_just_pressed("strafe_right"):
+    emit_signal("strafe_right_started")
+  if Input.is_action_just_released("strafe_right"):
+    emit_signal("strafe_right_ended")
     
   # Rotate left
   if Input.is_action_pressed("left"):
@@ -64,6 +76,14 @@ func _process(delta: float) -> void:
     emit_signal("rotate_left_started")
   if Input.is_action_just_released("left"):
     emit_signal("rotate_left_ended")
+
+  # Strafe left 
+  if Input.is_action_pressed("strafe_left"):
+    _strafe_left()
+  if Input.is_action_just_pressed("strafe_left"):
+    emit_signal("strafe_left_started")
+  if Input.is_action_just_released("strafe_left"):
+    emit_signal("strafe_left_ended")
   
   # Apply dampening
   inertia = inertia.move_toward(Vector2.ZERO, drag)
@@ -80,5 +100,11 @@ func _thrust_backward() -> void:
 func _rotate_right(delta: float) -> void:
   rotation_inertia += (rotation_strength / NORM_FACTOR) * delta
 
+func _strafe_right() -> void:
+  inertia += Vector2.RIGHT.rotated(player.rotation + PI / 2) * thrust_strength
+
 func _rotate_left(delta: float) -> void:
   rotation_inertia += -(rotation_strength / NORM_FACTOR) * delta
+
+func _strafe_left() -> void:
+  inertia += Vector2.RIGHT.rotated(player.rotation - PI / 2) * thrust_strength

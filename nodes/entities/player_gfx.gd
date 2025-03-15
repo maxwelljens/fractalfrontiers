@@ -16,8 +16,12 @@ func _ready() -> void:
   input_control.thrust_forward_ended.connect(_on_input_control_thrust_forward_ended)
   input_control.thrust_backward_started.connect(_on_input_control_thrust_backward_started)
   input_control.thrust_backward_ended.connect(_on_input_control_thrust_backward_ended)
+  input_control.strafe_right_started.connect(_on_input_control_strafe_right_started)
+  input_control.strafe_right_ended.connect(_on_input_control_strafe_right_ended)
   input_control.rotate_right_started.connect(_on_input_control_rotate_right_started)
   input_control.rotate_right_ended.connect(_on_input_control_rotate_right_ended)
+  input_control.strafe_left_started.connect(_on_input_control_strafe_left_started)
+  input_control.strafe_left_ended.connect(_on_input_control_strafe_left_ended)
   input_control.rotate_left_started.connect(_on_input_control_rotate_left_started)
   input_control.rotate_left_ended.connect(_on_input_control_rotate_left_ended)
   _blink_engine_light()
@@ -30,6 +34,8 @@ func _blink_engine_light() -> void:
     warning_light.energy = 0.0
     await get_tree().create_timer(0.1).timeout
     warning_light.energy = INTENSITY
+
+# Thrust
 
 func _on_input_control_thrust_backward_started() -> void:
   front_thruster_l.emitting = true
@@ -45,12 +51,32 @@ func _on_input_control_thrust_forward_started() -> void:
 func _on_input_control_thrust_forward_ended() -> void:
   rear_thruster.emitting = false 
 
+# Right
+
+func _on_input_control_strafe_right_started() -> void:
+  left_thruster_f.emitting = true
+  left_thruster_r.emitting = true
+
+func _on_input_control_strafe_right_ended() -> void:
+  left_thruster_f.emitting = false
+  left_thruster_r.emitting = false
+
 func _on_input_control_rotate_right_started() -> void:
   left_thruster_f.emitting = true
   right_thruster_r.emitting = true
 
 func _on_input_control_rotate_right_ended() -> void:
   left_thruster_f.emitting = false
+  right_thruster_r.emitting = false
+
+# Left
+
+func _on_input_control_strafe_left_started() -> void:
+  right_thruster_f.emitting = true
+  right_thruster_r.emitting = true
+
+func _on_input_control_strafe_left_ended() -> void:
+  right_thruster_f.emitting = false
   right_thruster_r.emitting = false
 
 func _on_input_control_rotate_left_started() -> void:

@@ -1,5 +1,6 @@
-[gd_scene load_steps=17 format=3 uid="uid://cop56vjof0q5y"]
+[gd_scene load_steps=19 format=3 uid="uid://cop56vjof0q5y"]
 
+[ext_resource type="Shader" uid="uid://66l4mk7tsj2f" path="res://nodes/shaders/colorrect.gdshader" id="1_cyelb"]
 [ext_resource type="Texture2D" uid="uid://hbpsbp4tm3uq" path="res://art/light/point_light.png" id="3_4b6mf"]
 [ext_resource type="PackedScene" uid="uid://bap2gxbilpq0k" path="res://nodes/entities/asteroid.tscn" id="5_r1ia8"]
 [ext_resource type="PackedScene" uid="uid://mfqv438mljqk" path="res://nodes/entities/player.tscn" id="6_w342s"]
@@ -76,6 +77,19 @@ generate_mipmaps = false
 color_ramp = SubResource("Gradient_8yctp")
 noise = SubResource("FastNoiseLite_gawcj")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pjyix"]
+shader = ExtResource("1_cyelb")
+shader_parameter/quantize_size = 1.0
+shader_parameter/handle_scale = false
+shader_parameter/handle_subpixels = true
+shader_parameter/dither_enabled = true
+shader_parameter/bayer_pattern = 3.0
+shader_parameter/divisions = 16.0
+shader_parameter/contrast = 1.055
+shader_parameter/shift = 0.0
+shader_parameter/grayscale = false
+shader_parameter/use_palette = false
+
 [node name="FFTest" type="Node2D"]
 
 [node name="Darkness" type="CanvasModulate" parent="."]
@@ -96,6 +110,7 @@ color = Color(0.0354509, 0.0354509, 0.0354509, 1)
 polygon = PackedVector2Array(-803, 68, 492, 73, 494, -508, -814, -501)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
 position = Vector2(-417, -241)
 color = Color(1, 0.732352, 0.675705, 1)
 energy = 4.0
@@ -106,11 +121,13 @@ texture_scale = 5.2
 height = 5.0
 
 [node name="Player" parent="." instance=ExtResource("6_w342s")]
-position = Vector2(-427, -121)
-rotation = -0.314378
+position = Vector2(-531, 72)
+rotation = -0.368038
 scale = Vector2(0.5, 0.5)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 7
+collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 polygon = PackedVector2Array(-130, 4, -98, -66, -33, -125, -16, -224, -84, -304, -67, -384, -28, -408, 50, -385, 99, -293, 116, -198, 377, -75, 507, -169, 389, -218, 364, -266, 461, -273, 514, -452, 505, -566, -808, -568, -788, -272, -573, -200, -383, -254, -379, -405, -305, -460, -248, -343, -183, -296, -196, -186, -277, -55, -369, 42, -361, 100, -280, 128, -267, 59, -189, -8)
@@ -163,3 +180,13 @@ offset_right = 3257.0
 offset_bottom = 1182.0
 texture = SubResource("NoiseTexture2D_rlbu5")
 stretch_mode = 1
+
+[node name="DitherShader" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_pjyix")
+custom_minimum_size = Vector2(2000, 2000)
+offset_left = -1000.0
+offset_top = -1000.0
+offset_right = 1000.0
+offset_bottom = 1000.0
+grow_horizontal = 2
+grow_vertical = 2
