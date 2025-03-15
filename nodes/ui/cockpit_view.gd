@@ -1,21 +1,28 @@
 class_name CockpitView extends CanvasLayer
 
 @export var stick: PathFollow3D
-var stick_position: float
+@export var end_stick: Node3D
+@export var sensitivity = 0.005  # Подстройка чувствительности движения
+
 var stick_moving: bool
+var stick_move_position: Vector3
 
-func _physics_process(delta: float):
-  if stick_moving:
-    stick.progress_ratio = stick_position
-    stick.progress_ratio = move_toward(stick.progress_ratio, 1.0, delta)
-    stick_position = stick.progress_ratio
-    stick.progress_ratio = ease(stick.progress_ratio, 6)
-  if stick.progress_ratio >= 1.0 and stick_moving:
-    print("Done")
-    stick_moving = false
+var dragging = false
+var mouse_start_x = 0
+var progress_start = 0
 
-func _on_area_3d_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
-  var mouse_click = event as InputEventMouseButton
-  if mouse_click and mouse_click.pressed:
-    print("Moving")
-    stick_moving = true
+
+
+func _input(event):
+    if event is InputEventMouseButton:
+        if event.button_index == MOUSE_BUTTON_LEFT:
+            if event.pressed:
+                dragging = true
+                mouse_start_x = event.position.x
+                progress_start = stick.progress_ratio
+            else:
+                dragging = false
+    
+    if event is InputEventMouseMotion and dragging:
+        var delta = event.position.x - mouse_start_x
+        stick.progress_ratio = clamp(progress_start + delta * sensitivity, 0.0, 1.0)
