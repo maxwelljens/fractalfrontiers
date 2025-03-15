@@ -1,15 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://cnnxid8wgrx5n"]
+[gd_scene load_steps=10 format=3 uid="uid://cnnxid8wgrx5n"]
 
 [ext_resource type="Script" uid="uid://bqslhd2pgjybk" path="res://nodes/ui/cockpit_view.gd" id="1_7de7h"]
 [ext_resource type="Shader" uid="uid://copr7jtk42vq6" path="res://nodes/shaders/subviewportcontainer.gdshader" id="1_dm0ji"]
 [ext_resource type="PackedScene" uid="uid://d0viu1em86k41" path="res://art/defaultcube.glb" id="2_2cb75"]
+[ext_resource type="PackedScene" uid="uid://dtn1fuwgw8h4t" path="res://art/models/dashboard_base.blend" id="4_bmhu0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jbuyg"]
 shader = ExtResource("1_dm0ji")
 shader_parameter/enabled = true
 shader_parameter/dithering = true
-shader_parameter/colors = 12
-shader_parameter/dither_size = 1
+shader_parameter/colors = 16
+shader_parameter/dither_size = 2
 
 [sub_resource type="Curve3D" id="Curve3D_2cb75"]
 _data = {
@@ -31,7 +32,8 @@ stick = NodePath("SubViewportContainer/SubViewport/Path3D/PathFollow3D")
 end_stick = NodePath("SubViewportContainer/SubViewport/Path3D/End")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.99999, -0.00441446, 0.000618359, 0.00438246, 0.998993, 0.0446415, -0.000814805, -0.0446383, 0.999003, -0.0385094, -0.000627398, 2.13437)
+transform = Transform3D(0.99999, -0.00441446, 0.000618359, 0.00438246, 0.998993, 0.0446415, -0.000814805, -0.0446383, 0.999003, -0.0385094, -0.000627398, 2.71865)
+fov = 60.0
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 material = SubResource("ShaderMaterial_jbuyg")
@@ -53,15 +55,28 @@ transform = Transform3D(0.99999, -0.00441446, 0.000618359, 0.00438246, 0.998993,
 remote_path = NodePath("../../../Camera3D")
 
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/RemoteTransform3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000476189, -0.0260877, 0.58384)
+fov = 60.0
 
 [node name="defaultcube" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_2cb75")]
-transform = Transform3D(0.311739, 0.0835301, -0.558994, -0.16706, 0.623477, 7.33907e-10, 0.539947, 0.144678, 0.322735, -1.80481, -1.5865, 0)
+transform = Transform3D(-0.00326779, 0.0238617, -0.440394, -0.286373, 0.334824, 0.0202663, 0.335421, 0.286095, 0.0130119, -1.57327, -1.58194, -0.461561)
+
+[node name="dashboard_base" parent="SubViewportContainer/SubViewport" instance=ExtResource("4_bmhu0")]
+transform = Transform3D(-2.90874e-08, 0, -0.665442, 0, 0.665442, 0, 0.665442, 0, -2.90874e-08, 0, -2.22638, -0.435275)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.10765)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.55519, 1.75968)
+light_color = Color(0.92693, 0.9885, 0.65374, 1)
+light_energy = 3.3
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+shadow_enabled = true
+shadow_opacity = 0.98
+omni_range = 9.0
+omni_attenuation = 0.5
 
 [node name="Path3D" type="Path3D" parent="SubViewportContainer/SubViewport"]
-transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -1.98972, -1.07407, 0.263218)
+transform = Transform3D(0.682283, 0.0370182, 0.00467796, -0.031398, 0.615881, -0.29429, -0.02016, 0.293636, 0.616664, -1.75272, -1.29706, -0.221653)
 curve = SubResource("Curve3D_2cb75")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="SubViewportContainer/SubViewport/Path3D"]
