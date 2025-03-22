@@ -1,27 +1,28 @@
-extends CharacterBody2D
+extends RayCast2D
 
-const MAX_EXTENSION := 65
 
 @export var player: Player
+@export var arm_speed: float = 300
+@export var arm_visuals: Node2D
 
-var collision: KinematicCollision2D
-var base: Vector2
-var extension: Vector2
 
-func _ready() -> void:
-  base = get_position()
-  extension = base
+@onready var max_extension := target_position.x
+@onready var base: float = position.x
+@onready var extension: float = base
+@onready var visuals_base: float = arm_visuals.position.x
 
-func _physics_process(delta) -> void:
-  if Input.is_action_pressed("ui_down"):
-    if extension.x > base.x:
-      extension.x -= 1
-  if Input.is_action_pressed("ui_up"):
-    if extension.x >= base.x and extension.x < base.x + MAX_EXTENSION:
-      extension.x += 1
 
-  position = extension
-  collision = move_and_collide(velocity * delta)
-  if collision != null:
-    player.emit_signal("collided")
-    extension.x -= 2
+var direction: float = 0
+
+
+func set_direction(v: float) -> void:
+    direction = v
+
+
+func _physics_process(delta: float) -> void:
+  extension += direction * delta * arm_speed
+  if is_colliding():
+    extension = to_local(get_collision_point()).x
+  extension = clamp(extension, base, max_extension)
+  arm_visuals.position.x = (extension - base) - visuals_base
+  target_position.x = extension

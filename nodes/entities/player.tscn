@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://mfqv438mljqk"]
+[gd_scene load_steps=27 format=3 uid="uid://mfqv438mljqk"]
 
 [ext_resource type="Script" uid="uid://r3xm3lvxacae" path="res://nodes/entities/player.gd" id="1_36kp7"]
 [ext_resource type="Material" uid="uid://b7n4qkux5vhur" path="res://art/particles/rear_thruster.tres" id="2_0vb0s"]
@@ -29,10 +29,6 @@ particles_animation = true
 particles_anim_h_frames = 8
 particles_anim_v_frames = 1
 particles_anim_loop = false
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pbh5t"]
-radius = 7.0
-height = 98.0
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_eglpy"]
 diffuse_texture = ExtResource("13_uplv2")
@@ -199,23 +195,21 @@ texture = ExtResource("9_njeqt")
 rotation = -1.57079
 polygon = PackedVector2Array(90.9992, -123.001, 90.9997, -51.0006, 76.9997, -48.0005, 77.0002, 29.9995, 90.0002, 34.9994, 90.0007, 104.999, 62.0007, 111, 41.0012, 186, 21.0012, 186, 12.001, 163, -12.999, 163, -21.9988, 186, -40.9988, 186, -60.9993, 111, -90.9993, 104.001, -90.9998, 37.0006, -75.9998, 29.0005, -76.0003, -47.9995, -91.0003, -51.9994, -91.0008, -121.999, -57.0008, -126, -41.0011, -175, 40.9989, -175, 57.9992, -127)
 
-[node name="Arm" type="CharacterBody2D" parent="." node_paths=PackedStringArray("player")]
-position = Vector2(90, 0)
-collision_layer = 2
-collision_mask = 2
-script = ExtResource("20_0s7mt")
-player = NodePath("..")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Arm"]
-position = Vector2(44, 0)
-rotation = -1.57079
-shape = SubResource("CapsuleShape2D_pbh5t")
+[node name="Arm" type="Node2D" parent="."]
+position = Vector2(134, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Arm"]
-position = Vector2(46.665, 9.85656e-13)
 rotation = -1.57079
 scale = Vector2(0.239745, 0.239745)
 texture = SubResource("CanvasTexture_eglpy")
+
+[node name="Arm" type="RayCast2D" parent="Arm" node_paths=PackedStringArray("player", "arm_visuals")]
+position = Vector2(27, 0)
+target_position = Vector2(100, 0)
+collision_mask = 2
+script = ExtResource("20_0s7mt")
+player = NodePath("../..")
+arm_visuals = NodePath("../Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 2
@@ -260,3 +254,5 @@ drag = 0.01
 rotation_drag = 0.2
 
 [node name="CockpitView" parent="." instance=ExtResource("23_jbuyg")]
+
+[connection signal="lever_changed" from="CockpitView" to="Arm/Arm" method="set_direction"]
