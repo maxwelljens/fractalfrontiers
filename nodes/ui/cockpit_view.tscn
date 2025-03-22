@@ -78,10 +78,11 @@ loop = false
 [node name="dashboard_lever" parent="SubViewportContainer/SubViewport/Path3D/PathFollow3D" instance=ExtResource("3_xpfa7")]
 transform = Transform3D(0.00256173, -0.0117526, -0.219949, -0.0734562, 0.207325, -0.0119337, 0.207653, 0.0734851, -0.00150805, -0.0135792, 0.264446, 0.0848622)
 
-[node name="Area3D" type="Area3D" parent="SubViewportContainer/SubViewport/Path3D/PathFollow3D/dashboard_lever"]
+[node name="LeverArea" type="Area3D" parent="SubViewportContainer/SubViewport/Path3D/PathFollow3D/dashboard_lever"]
+unique_name_in_owner = true
 transform = Transform3D(0.707107, -1.57598e-08, -0.707106, 0.707106, -1.97895e-08, 0.707107, -1.21687e-08, -1, -2.90598e-08, -0.0267587, 0.996252, -0.513368)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Path3D/PathFollow3D/dashboard_lever/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Path3D/PathFollow3D/dashboard_lever/LeverArea"]
 shape = SubResource("CylinderShape3D_2cb75")
 
 [node name="End" type="Marker3D" parent="SubViewportContainer/SubViewport/Path3D"]
@@ -89,5 +90,3 @@ transform = Transform3D(1, -8.3819e-09, 0, 2.79397e-09, 1, 0, 0, -2.68221e-07, 1
 
 [node name="Start" type="Marker3D" parent="SubViewportContainer/SubViewport/Path3D"]
 transform = Transform3D(1, -4.65661e-09, 0, 2.79397e-09, 1, 0, 0, -1.19209e-07, 1, -0.0244185, 0.00322068, 0.00810689)
-
-[connection signal="input_event" from="SubViewportContainer/SubViewport/Path3D/PathFollow3D/dashboard_lever/Area3D" to="." method="_on_area_3d_input_event"]
